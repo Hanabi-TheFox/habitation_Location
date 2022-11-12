@@ -1,4 +1,6 @@
-# Makefile du projet habitation_Location fait par Ethan et Renato
+#--------------------------------------------------
+#---------- Propriété de Ethan et Renato ----------
+#--------------------------------------------------
 
 CC=gcc
 CFLAGS= -W -Wall
