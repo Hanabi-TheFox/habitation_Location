@@ -10,6 +10,9 @@
 int main(){
 	// Tableau contenant les données du fichier airbnb_donees_propre.csv
 	Habitation dataHabitation[data_Max_Value];
+    // Habitation candidat dont on cherche à déterminer le prix
+    Habitation X;
+    // [ Données les informations du candidat (sauf le prix)]
 	// Tableau qui contiendra K lignes aléatoire du fichier airbnb_donees_propre.csv
 	Habitation dataHanitationRNG[k];
 	int test;
