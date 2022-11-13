@@ -14,12 +14,12 @@ int main(){
     Habitation X;
     // [ Données les informations du candidat (sauf le prix)]
 	// Tableau qui contiendra K lignes aléatoire du fichier airbnb_donees_propre.csv
-	Habitation dataHanitationRNG[k];
+	Habitation dataHabitationRNG[k];
 	int test;
 	test = lecturedata(dataHabitation);
 	// Reste à faire : - Calculer la distance euclienne du teableau dataHabitation par rapport à X.
-	// - Trier le tableau de manière croissante par rapport à la variable "distance"
 	// - Générer un autre tableau de taille K qui contiendra une permutation aléatoire des valeurs du tableau trié
+	// - Trier le tableau de manière croissante par rapport à la variable "distance"
 	// - Lire les k premières valeurs des tableaus (trié et randomisé) afin de 
 	// déterminer la moyenne des prix des deux tableaux
 	// Tester le programme en faisant varier k

@@ -17,7 +17,7 @@ void calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X); // Pas
 void triDistance(Habitation *dataHabitation); // Pas commencé
 // Fonction générant le tableau de taille k contenant une permutation
 // aléatoire du fichier airbnb_donnees_propre.csv
-void generationTabRNG(Habitation *dataHabitation, Habitation *dataHanitationRNG); // Pas commencé
+void generationTabRNG(Habitation *dataHabitation, Habitation *dataHanitationRNG); // Pas commencé //faire 0.. data_Max_Value
 // Fonction calculant le prix moyen des deux tableaux afin de donner 
 // le prix prédit du logement X.
-void moyennePrix(Habitation *dataHabitation, Habitation *dataHanitationRNG); // Pas commencé
+float moyennePrix(Habitation *dataHabitation, Habitation *dataHanitationRNG); // Pas commencé //FAIRE
