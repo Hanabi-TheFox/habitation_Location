@@ -134,9 +134,22 @@ Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitati
     return *dataHabitationRNG;
 }
 
-float moyennePrix(Habitation *dataHabitation, Habitation *dataHanitationRNG){
+float moyennePrix(Habitation *dataHabitation, Habitation *dataHabitationRNG){
     // Sommer les prix des k lignes du tableau dataHabitation et dataHabitationRNG
     // Renvoyer la moyenne qui sera le prix du candidat.
     //dataHabitation deja trié
+
+    float float_prix_dataHabitation;
+    float float_prix_dataHabitationRNG;
+    float moyenne_prix;
+
+    for (int i = 0;i<k;i++) {
+        float_prix_dataHabitation += dataHabitation[i].float_prix;
+        float_prix_dataHabitationRNG += dataHabitationRNG[i].float_prix;
+    }
+
+    moyenne_prix = (float_prix_dataHabitationRNG + float_prix_dataHabitation) / 2*k;
+
+    return moyenne_prix;
 
 }
