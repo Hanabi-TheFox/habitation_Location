@@ -115,13 +115,34 @@ Habitation triDistance(Habitation *dataHabitation){
     // Le return doit être le tableau dataHabitation trié selon les distances
 }
 
-Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHanitationRNG){
+Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitationRNG){
     // Générer k nombre aléatoire et lire la k-ième ligne du tableau dataHabitation
     // pour le mettre dans la i-ème ligne du tableau dataHabitationRNG
     // Le return doit être le tableau dataHabitationRNG généré
+
+    srand ( time(NULL) );
+    int tailleDataHabitation = tailledata();
+    for (int i=0;i<k;i++) {
+        int swap_index = rand() % tailleDataHabitation; //on prend un index
+                                    //aleatoire entr 0..taille du tab des habitations
+
+        //la valeur contenue dans dataHabitationRNG[i] = dataHabitation[swap_index]
+        *(dataHabitationRNG+i) = *(dataHabitation+swap_index);
+        
+    }
+
+    return *dataHabitationRNG;
 }
 
 float moyennePrix(Habitation *dataHabitation, Habitation *dataHanitationRNG){
     // Sommer les prix des k lignes du tableau dataHabitation et dataHabitationRNG
     // Renvoyer la moyenne qui sera le prix du candidat.
+    //dataHabitation deja trié
+
+    float float_prix_dataHabitation;
+    float float_prix_dataHabitationRNG;
+
+    for (int i = 0;i<k;i++) {
+        float_prix_dataHabitation = float_prix_dataHabitation + *(dataHabitation+i)->float_prix;
+    }
 }
