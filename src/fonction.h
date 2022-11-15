@@ -10,7 +10,7 @@
 int tailledata(void);
 // Fonction créant le tableau qui contiendra toutes les habitations 
 // du fichier airbnb_donnees_propre.csv
-Habitation lecturedata(Habitation *dataHabitation);// "Erreur : Segmentation fault (core dumped)"
+Habitation lecturedata(Habitation *dataHabitation);
 // Fonction calculant la distance euclidienne de chaque paramètre entre
 // les Data et l'habitation X
 void calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X); // Pas commencé

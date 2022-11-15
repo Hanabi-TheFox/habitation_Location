@@ -19,11 +19,6 @@ int main(){
 	// Tableau qui contiendra K lignes aléatoire du fichier airbnb_donees_propre.csv
 	//Habitation dataHabitationRNG[k];
 	*dataHabitation = lecturedata(dataHabitation);
-    // on affiche les données du tableau
-    printf("id;nbr_personnes_acceuillables;nbr_chambre;distance;similarite;prix;\n");
-    for (int i = 0; i < sizedata; i++){
-        printf("%d;%d;%f;%f;%f;%f;%d;%d\n", dataHabitation[i].int_id, dataHabitation[i].int_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].int_nuit_minimum, dataHabitation[i].int_nuit_maximum);
-    }
 
 	// TODO : - Calculer la distance euclienne du teableau dataHabitation par rapport à X.
 	// - Générer un autre tableau de taille K qui contiendra une permutation aléatoire des valeurs du tableau trié
