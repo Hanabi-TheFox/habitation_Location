@@ -101,3 +101,27 @@ Habitation lecturedata(Habitation *dataHabitation){
     }
     return *dataHabitation;
 }
+
+Habitation calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X){
+    // Faire le calcul pour les nbr_personnes_acceuillables
+    // ( /!\ Penser à convertir les entiers en float car les fonctions math.h ne lise pas d'entiers)
+    // Une fois que tout fonctionne, il faudra aussi le faire pour nbr_chambre et nbr_lit et donc
+    // changer la variable distance dans la structure Habitation pour en faire un tableau de taille 3
+    // Le return doit être le tableau dataHabitation avec les distances calculées
+}
+
+Habitation triDistance(Habitation *dataHabitation){
+    // Surement faire un quicksort ?
+    // Le return doit être le tableau dataHabitation trié selon les distances
+}
+
+Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHanitationRNG){
+    // Générer k nombre aléatoire et lire la k-ième ligne du tableau dataHabitation
+    // pour le mettre dans la i-ème ligne du tableau dataHabitationRNG
+    // Le return doit être le tableau dataHabitationRNG généré
+}
+
+float moyennePrix(Habitation *dataHabitation, Habitation *dataHanitationRNG){
+    // Sommer les prix des k lignes du tableau dataHabitation et dataHabitationRNG
+    // Renvoyer la moyenne qui sera le prix du candidat.
+}
