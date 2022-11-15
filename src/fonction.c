@@ -139,10 +139,4 @@ float moyennePrix(Habitation *dataHabitation, Habitation *dataHanitationRNG){
     // Renvoyer la moyenne qui sera le prix du candidat.
     //dataHabitation deja trié
 
-    float float_prix_dataHabitation;
-    float float_prix_dataHabitationRNG;
-
-    for (int i = 0;i<k;i++) {
-        float_prix_dataHabitation = float_prix_dataHabitation + *(dataHabitation+i)->float_prix;
-    }
 }
