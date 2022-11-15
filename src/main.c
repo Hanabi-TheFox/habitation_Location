@@ -7,6 +7,15 @@
 
 int main(){
     int sizedata = tailledata();
+    if(sizedata = 0){
+        printf("Erreur lors de la lecture du fichier airbnb_donnees_propre.csv\n il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
+        exit(0);
+    }
+    if(sizedata < k){
+        printf("Le nombre de logement à comparer est supérieur au nombre de logement dans la base de donnée.\n");
+        printf("Veuillez modifier la valeur de k dans le fichier struct.h\n");
+        exit(0);
+    }
 	// Tableau contenant les données du fichier airbnb_donees_propre.csv
     Habitation *dataHabitation = malloc(sizedata * sizeof(Habitation));
     if (dataHabitation == NULL){

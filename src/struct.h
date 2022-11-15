@@ -7,16 +7,15 @@
 
 #ifndef STRUCT_H
 #define STRUCT_H
-#define k 50 // Nombre de logement à comparer au candidat. Max : data_Max_Value (défaut : 7918)
-#define data_Max_Value 7918 // A changer si le nombre de données du fichier data est différent.
+// Nombre de logement à comparer au candidat.
+// (ne dois pas dépasser le nombre de lignes dans airbnb_donnees_propre.csv)
+#define k 50 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <time.h>
 // Définition de la structure "Habitation"
-// Les variables sont tous en float car on ne peut pas utiliser 
-// des entiers pour calculer la distance euclidienne.
 typedef struct Habitation{
 	int int_id;
 	int int_nbr_personnes_acceuillables;
@@ -27,7 +26,7 @@ typedef struct Habitation{
 	int int_nuit_minimum;
 	int int_nuit_maximum;
 	int int_nombre_de_retour;
-	float float_distance;
+	float float_distance; // Prochainement, il faudra le changer en tableau de taille 3
 }Habitation;
 
 #endif
