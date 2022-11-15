@@ -7,7 +7,7 @@
 
 #ifndef STRUCT_H
 #define STRUCT_H
-#define k 50 // Nombre de logement à comparer au candidat. Max : 7918
+#define k 50 // Nombre de logement à comparer au candidat. Max : data_Max_Value (défaut : 7918)
 #define data_Max_Value 7918 // A changer si le nombre de données du fichier data est différent.
 #include <stdio.h>
 #include <stdlib.h>
