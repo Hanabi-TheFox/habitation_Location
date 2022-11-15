@@ -8,7 +8,8 @@
 int main(){
     int sizedata = tailledata();
     if(sizedata = 0){
-        printf("Erreur lors de la lecture du fichier airbnb_donnees_propre.csv\n il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
+        printf("Erreur lors de la lecture du fichier airbnb_donnees_propre.csv\n");
+        printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
         exit(0);
     }
     if(sizedata < k){
