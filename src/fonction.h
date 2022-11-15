@@ -6,9 +6,11 @@
 
 #include "struct.h"
 
+// fonction retournant le nombre de ligne du fichier airbnb_donnees_propre.csv
+int tailledata(void);
 // Fonction créant le tableau qui contiendra toutes les habitations 
 // du fichier airbnb_donnees_propre.csv
-int lecturedata(Habitation *dataHabitation); // Incomplète
+Habitation lecturedata(Habitation *dataHabitation);// "Erreur : Segmentation fault (core dumped)"
 // Fonction calculant la distance euclidienne de chaque paramètre entre
 // les Data et l'habitation X
 void calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X); // Pas commencé
