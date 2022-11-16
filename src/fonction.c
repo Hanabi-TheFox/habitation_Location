@@ -148,7 +148,7 @@ float moyennePrix(Habitation *dataHabitation, Habitation *dataHabitationRNG){
         float_prix_dataHabitationRNG += dataHabitationRNG[i].float_prix;
     }
 
-    moyenne_prix = (float_prix_dataHabitationRNG + float_prix_dataHabitation) / 2*k;
+    moyenne_prix = (float_prix_dataHabitationRNG + float_prix_dataHabitation) / (2*k);
 
     return moyenne_prix;
 
