@@ -7,10 +7,10 @@
 #include "struct.h"
 
 // fonction retournant le nombre de ligne du fichier airbnb_donnees_propre.csv
-int tailledata(void);
+int tailledata(char *char_NomFichier);
 // Fonction créant le tableau qui contiendra toutes les habitations 
 // du fichier airbnb_donnees_propre.csv
-Habitation lecturedata(Habitation *dataHabitation);
+Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier);
 // Fonction calculant la distance euclidienne de chaque paramètre entre
 // les Data et l'habitation X
 Habitation calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X); // Pas commencé

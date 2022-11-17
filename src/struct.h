@@ -10,6 +10,7 @@
 // Nombre de logement à comparer au candidat.
 // (ne dois pas dépasser le nombre de lignes dans airbnb_donnees_propre.csv)
 #define k 50 
+#define Bonus 0 // 0 = désactivé, 1 = activé
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

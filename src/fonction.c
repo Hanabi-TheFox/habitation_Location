@@ -6,9 +6,9 @@
 #include "fonction.h"
 #define N 80
 
-int tailledata(void){
+int tailledata(char *char_NomFichier){
     FILE *fichier = NULL;
-    fichier = fopen("data/airbnb_donnees_propre.csv", "r");
+    fichier = fopen(char_NomFichier, "r");
     // Vérification du fopen
     if (fichier == NULL){
         printf("Erreur lors de l'ouverture du fichier airbnb_donnees_propre.csv\n");
@@ -26,9 +26,9 @@ int tailledata(void){
     return i-1;
 }
 
-Habitation lecturedata(Habitation *dataHabitation){
+Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
     FILE *fichier = NULL;
-    fichier = fopen("data/airbnb_donnees_propre.csv", "r");
+    fichier = fopen(char_NomFichier, "r");
     // Vérification du fopen
     if (fichier == NULL){
         printf("Erreur lors de l'ouverture du fichier airbnb_donnees_propre.csv\n");
@@ -121,7 +121,7 @@ Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitati
     // Le return doit être le tableau dataHabitationRNG généré
 
     srand ( time(NULL) );
-    int tailleDataHabitation = tailledata();
+    int tailleDataHabitation = tailledata("data/airbnb_donnees_propre.csv");
     for (int i=0;i<k;i++) {
         int swap_index = rand() % tailleDataHabitation; //on prend un index
                                     //aleatoire entr 0..taille du tab des habitations
