@@ -16,6 +16,12 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier);
 Habitation calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X); // Pas commencé
 // Fonction triant le tableau dataHabitation de façon croissant selon 
 // la variable float_distance
+
+//methodes et fonctions pour faire le tri rapide du tableau dataHabitation
+void permuter(Habitation *a,Habitation *b);
+void triRapide(Habitation *tab, int length);
+void triRapideRecursive(Habitation *tab, int low, int hight);
+int partition(Habitation *tab,int low, int hight);
 Habitation triDistance(Habitation *dataHabitation); // Pas commencé
 // Fonction générant le tableau de taille k contenant une permutation
 // aléatoire du fichier airbnb_donnees_propre.csv

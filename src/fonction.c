@@ -113,6 +113,58 @@ Habitation calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X){
 Habitation triDistance(Habitation *dataHabitation){
     // Surement faire un quicksort ?
     // Le return doit être le tableau dataHabitation trié selon les distances
+
+    int taille = tailledata("data/airbnb_donnees_propre.csv"); //longueur de dataHabitation
+    quickSort(dataHabitation,taille); //trie recursivement dataHabitation selon les distances de similarité
+}
+
+void permuter(Habitation *a,Habitation *b) {
+    Habitation tmp = *a; //la valeur de la variable qui pointe a est affecté à 'tmp'
+    *a = *b;
+    *b = tmp;  //permutation simple entre 'a' et 'b'
+}
+
+void triRapide(Habitation *tab, int length) {
+
+    srand( time(NULL) );
+    triRapideRecursive(tab,0,length-1); //appel de la fonction recursive
+
+}
+
+void triRapideRecursive(Habitation *tab, int low, int hight){
+
+    if (low < hight) { //si l'élement de gauche est encore plus petit que l'élement de droite
+        //on arrete quand low > hight
+    int pivot_index = partition(tab,low,hight);
+    triRapideRecursive(tab,low,pivot_index-1);
+    triRapideRecursive(tab,pivot_index+1,hight);
+    }
+}
+
+int partition(Habitation *tab,int low, int hight) {
+
+    int pivot_index = low + ( rand() % (hight-low)); //on prend un index pour le pivot aleatoire
+
+    if (pivot_index != hight) { //si l'index n'est pas deja le dernier
+        swap(&tab[pivot_index],&tab[hight]);
+    }
+
+    float pivot_value = tab[hight].float_distance; // tab[hight] est le pivot
+
+    int i = low;
+
+    for (int j = low; j < hight;j++) {
+            
+            if ( tab[j].float_distance <= pivot_value ) {
+                permuter(&tab[i],&tab[j]); // on permute la valeur
+                i++;
+            }
+
+    }
+
+    swap(&tab[i],&tab[hight]);
+
+    return i;
 }
 
 Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitationRNG){
