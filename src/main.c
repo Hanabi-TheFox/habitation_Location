@@ -9,7 +9,7 @@ int main(){
     if (Bonus == 0){
         // Déclaration des variables
         int int_tailledata = tailledata("data/airbnb_donnees_propre.csv");
-        if(int_tailledata = 0){
+        if(int_tailledata == 0){
             printf("Erreur lors de la lecture du fichier airbnb_donnees_propre.csv\n");
             printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
             exit(0);
@@ -40,18 +40,21 @@ int main(){
 
         // Lecture du fichier airbnb_donees_propre.csv
         *dataHabitation = lecturedata(dataHabitation, "data/airbnb_donnees_propre.csv");
-
+        /*
         // Calcul de la distance entre le candidat et les logements de la base de donnée
-        *dataHabitation = calculdistance(dataHabitation, int_tailledata, &X);
+        *dataHabitation = calculdistance(dataHabitation, int_tailledata, &X); */
 
         // Permutation des données du tableau dataHabitation
         *dataHabitation = permutationAleatoire(dataHabitation, int_tailledata);
 
+        /*
         // Tri du tableau dataHabitation
         *dataHabitation = triDistance(dataHabitation);
 
         // Calcul du prix du logement
-        X.float_prix = calculprix(dataHabitation);
+        int int_K = k;
+        X.float_prix = calculprix(dataHabitation, int_K);
+        */
 
         // TODO : - Calculer la distance euclienne du teableau dataHabitation par rapport à X.
         // Tester le programme en faisant varier k
