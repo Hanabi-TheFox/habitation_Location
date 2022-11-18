@@ -146,12 +146,14 @@ int partition(Habitation *tab,int low, int hight) {
     int pivot_index = low + ( rand() % (hight-low)); //on prend un index pour le pivot aleatoire
 
     if (pivot_index != hight) { //si l'index n'est pas deja le dernier
-        swap(&tab[pivot_index],&tab[hight]);
+        swap(&tab[pivot_index],&tab[hight]); //on permute le pivot avec le dernier élement
+                                        //le pivot est maintenant place à la fin
     }
 
     float pivot_value = tab[hight].float_distance; // tab[hight] est le pivot
 
-    int i = low;
+    int i = low; //pour prendre l'index d'un élement plus grand que le pivot pour permuter
+                        //avec une valeur plus petite que le pivot
 
     for (int j = low; j < hight;j++) {
             
@@ -161,10 +163,10 @@ int partition(Habitation *tab,int low, int hight) {
             }
 
     }
-
-    swap(&tab[i],&tab[hight]);
-
-    return i;
+    swap(&tab[i],&tab[hight]); //tab[i] marque l'élement qui partitionne le tableau
+                                //donc on permute avec le pivot à la fin
+                                //tab[i] est au final le pivot
+    return i; //on retoune la position du pivot
 }
 
 Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitationRNG){
@@ -172,7 +174,8 @@ Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitati
     // pour le mettre dans la i-ème ligne du tableau dataHabitationRNG
     // Le return doit être le tableau dataHabitationRNG généré
 
-    srand ( time(NULL) );
+    srand ( time(NULL) ); //pour obtenir toujours un numero aleatoire different
+                    //car l'heure actuelle change toujours
     int tailleDataHabitation = tailledata("data/airbnb_donnees_propre.csv");
     for (int i=0;i<k;i++) {
         int swap_index = rand() % tailleDataHabitation; //on prend un index
