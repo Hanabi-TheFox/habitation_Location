@@ -13,10 +13,11 @@ int tailledata(char *char_NomFichier);
 Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier);
 // Fonction calculant la distance euclidienne de chaque paramètre entre
 // les Data et l'habitation X
-Habitation calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X); // Pas commencé
+Habitation calculdistance(Habitation *dataHabitation, int int_tailledata, Habitation *X);
+// Fonction permutant aléatoirement les données du tableau dataHabitation
+Habitation permutationAleatoire(Habitation *dataHabitation, int int_tailleData);
 // Fonction triant le tableau dataHabitation de façon croissant selon 
 // la variable float_distance
-
 //methodes et fonctions pour faire le tri rapide du tableau dataHabitation
 void permuter(Habitation *a,Habitation *b);
 void triRapide(Habitation *tab, int length);
@@ -28,4 +29,4 @@ Habitation triDistance(Habitation *dataHabitation); // Pas commencé
 Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitationRNG); // Pas commencé //faire 0.. data_Max_Value
 // Fonction calculant le prix moyen des deux tableaux afin de donner 
 // le prix prédit du logement X.
-float moyennePrix(Habitation *dataHabitation, Habitation *dataHanitationRNG); // Pas commencé //FAIRE
+float calculPrix(Habitation *dataHabitation); // Pas commencé //FAIRE

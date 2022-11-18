@@ -83,10 +83,6 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
                 if (i == 8){
                     dataHabitation[j].int_nombre_de_retour = atoi(token);
                 }
-                // On récupère la distance
-                if (i == 9){
-                    dataHabitation[j].float_distance = atof(token);
-                }
                 // On récupère le prochain token
                 token = strtok(NULL, ",");
                 i++;
@@ -102,20 +98,55 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
     return *dataHabitation;
 }
 
-Habitation calculDistanceSimilarite(Habitation *dataHabitation, Habitation *X){
+Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habitation *X){
     // Faire le calcul pour les nbr_personnes_acceuillables
     // ( /!\ Penser à convertir les entiers en float car les fonctions math.h ne lise pas d'entiers)
     // Une fois que tout fonctionne, il faudra aussi le faire pour nbr_chambre et nbr_lit et donc
     // changer la variable distance dans la structure Habitation pour en faire un tableau de taille 3
     // Le return doit être le tableau dataHabitation avec les distances calculées
+    for (int i = 0; i < int_tailleData; i++){
+        // On calcule la distance par rapport à nbr_personnes_acceuillables
+        dataHabitation[i].float_distance[0] = distance(X->int_nbr_personnes_acceuillables, dataHabitation[i].int_nbr_personnes_acceuillables, 0);
+        // On calcule la distance par rapport à nbr_chambre
+        dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre, 0);
+        // On calcule la distance par rapport à nbr_lit
+        dataHabitation[i].float_distance[2] = distance(X->float_nbr_lit, dataHabitation[i].float_nbr_lit, 0);
+        // On calcule la distance_final
+        dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2])/3);
+    }
+
+    return *dataHabitation;
+}
+
+float distance(float float_X, float float_Y, int parametre){
+    float distance;
+    if(parametre == 0){
+        // On calcule la distance pour nbr_personnes_acceuillables
+    } else if(parametre == 1){
+        // On calcule la distance pour nbr_chambre
+    } else if(parametre == 2){
+        // On calcule la distance pour nbr_lit
+    }
+    return distance;
+}
+
+Habitation permutationAleatoire(Habitation *dataHabitation, int int_tailleData){
+    // Initialisation de rand
+    srand ( time(NULL) );
+    for(int i = 0; i < int_tailleData*3; i++){
+        int j = rand() % int_tailleData;
+        // On permute les données
+        Habitation temp = dataHabitation[i];
+        dataHabitation[i] = dataHabitation[j];
+        dataHabitation[j] = temp;
+    }
+    return *dataHabitation;
 }
 
 Habitation triDistance(Habitation *dataHabitation){
-    // Surement faire un quicksort ?
-    // Le return doit être le tableau dataHabitation trié selon les distances
 
     int taille = tailledata("data/airbnb_donnees_propre.csv"); //longueur de dataHabitation
-    quickSort(dataHabitation,taille); //trie recursivement dataHabitation selon les distances de similarité
+    triRapide(dataHabitation,taille); //trie recursivement dataHabitation selon les distances de similarité
 }
 
 void permuter(Habitation *a,Habitation *b) {
@@ -169,41 +200,18 @@ int partition(Habitation *tab,int low, int hight) {
     return i; //on retoune la position du pivot
 }
 
-Habitation generationTabRNG(Habitation *dataHabitation, Habitation *dataHabitationRNG){
-    // Générer k nombre aléatoire et lire la k-ième ligne du tableau dataHabitation
-    // pour le mettre dans la i-ème ligne du tableau dataHabitationRNG
-    // Le return doit être le tableau dataHabitationRNG généré
-
-    srand ( time(NULL) ); //pour obtenir toujours un numero aleatoire different
-                    //car l'heure actuelle change toujours
-    int tailleDataHabitation = tailledata("data/airbnb_donnees_propre.csv");
-    for (int i=0;i<k;i++) {
-        int swap_index = rand() % tailleDataHabitation; //on prend un index
-                                    //aleatoire entr 0..taille du tab des habitations
-
-        //la valeur contenue dans dataHabitationRNG[i] = dataHabitation[swap_index]
-        *(dataHabitationRNG+i) = *(dataHabitation+swap_index);
-        
-    }
-
-    return *dataHabitationRNG;
-}
-
-float moyennePrix(Habitation *dataHabitation, Habitation *dataHabitationRNG){
+float calculPrix(Habitation *dataHabitation){
     // Sommer les prix des k lignes du tableau dataHabitation et dataHabitationRNG
     // Renvoyer la moyenne qui sera le prix du candidat.
-    //dataHabitation deja trié
 
     float float_prix_dataHabitation;
-    float float_prix_dataHabitationRNG;
     float moyenne_prix;
 
     for (int i = 0;i<k;i++) {
         float_prix_dataHabitation += dataHabitation[i].float_prix;
-        float_prix_dataHabitationRNG += dataHabitationRNG[i].float_prix;
     }
 
-    moyenne_prix = (float_prix_dataHabitationRNG + float_prix_dataHabitation) / (2*k);
+    moyenne_prix = float_prix_dataHabitation/k;
 
     return moyenne_prix;
 

@@ -27,7 +27,8 @@ typedef struct Habitation{
 	int int_nuit_minimum;
 	int int_nuit_maximum;
 	int int_nombre_de_retour;
-	float float_distance; // Prochainement, il faudra le changer en tableau de taille 3
+	float float_distance_final;
+    float float_distance[3];
 }Habitation;
 
 #endif

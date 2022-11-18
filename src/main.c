@@ -8,19 +8,19 @@
 int main(){
     if (Bonus == 0){
         // Déclaration des variables
-        int sizedata = tailledata("data/airbnb_donnees_propre.csv");
-        if(sizedata = 0){
+        int int_tailledata = tailledata("data/airbnb_donnees_propre.csv");
+        if(int_tailledata = 0){
             printf("Erreur lors de la lecture du fichier airbnb_donnees_propre.csv\n");
             printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
             exit(0);
         }
-        if(sizedata < k){
+        if(int_tailledata < k){
             printf("Le nombre de logement à comparer est supérieur au nombre de logement dans la base de donnée.\n");
             printf("Veuillez modifier la valeur de k dans le fichier struct.h\n");
             exit(0);
         }
         // Tableau contenant les données du fichier airbnb_donees_propre.csv
-        Habitation *dataHabitation = malloc(sizedata * sizeof(Habitation));
+        Habitation *dataHabitation = malloc(int_tailledata * sizeof(Habitation));
         if (dataHabitation == NULL){
             printf("Erreur d'allocation mémoire");
             exit(1);
@@ -38,17 +38,22 @@ int main(){
         X.int_nuit_maximum = 12;
         X.int_nombre_de_retour = 21;
 
-        // Tableau qui contiendra K lignes aléatoire du fichier airbnb_donees_propre.csv
-        Habitation dataHabitationRNG[k];
-
         // Lecture du fichier airbnb_donees_propre.csv
         *dataHabitation = lecturedata(dataHabitation, "data/airbnb_donnees_propre.csv");
 
+        // Calcul de la distance entre le candidat et les logements de la base de donnée
+        *dataHabitation = calculdistance(dataHabitation, int_tailledata, &X);
+
+        // Permutation des données du tableau dataHabitation
+        *dataHabitation = permutationAleatoire(dataHabitation, int_tailledata);
+
+        // Tri du tableau dataHabitation
+        *dataHabitation = triDistance(dataHabitation);
+
+        // Calcul du prix du logement
+        X.float_prix = calculprix(dataHabitation);
+
         // TODO : - Calculer la distance euclienne du teableau dataHabitation par rapport à X.
-        // - Générer un autre tableau de taille K qui contiendra une permutation aléatoire des valeurs du tableau trié
-        // - Trier le tableau de manière croissante par rapport à la variable "distance"
-        // - Lire les k premières valeurs des tableaus (trié et randomisé) afin de 
-        // déterminer la moyenne des prix des deux tableaux
         // Tester le programme en faisant varier k
         // Faire d'autre modèle utilisant une autre variable pour le calcul de la distance.
         // -> changer le "float float_distance" en "float float_distance[3]"
