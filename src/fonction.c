@@ -104,7 +104,7 @@ Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habita
     // Une fois que tout fonctionne, il faudra aussi le faire pour nbr_chambre et nbr_lit et donc
     // changer la variable distance dans la structure Habitation pour en faire un tableau de taille 3
     // Le return doit être le tableau dataHabitation avec les distances calculées
-    for (int i = 0; i < int_tailleData; i++){
+    for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
         // On calcule la distance par rapport à nbr_personnes_acceuillables
         dataHabitation[i].float_distance[0] = distance((float)X->int_nbr_personnes_acceuillables, (float)dataHabitation[i].int_nbr_personnes_acceuillables);
         // On calcule la distance par rapport à nbr_chambre
@@ -121,6 +121,9 @@ Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habita
 float distance(float float_X, float float_Y){
     float distance;
     // On calcule la distance entre float_x et float_y
+
+    distance = pow(float_X - float_Y,2) ; //(x - y)²
+    distance = sqrt(distance); 
     return distance;
 }
 
