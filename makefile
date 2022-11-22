@@ -4,6 +4,7 @@
 
 CC=gcc
 CFLAGS= -W -Wall
+LDFLAGS= -lm
 RM=rm -f bin/*.o
 srcdir= src/
 bindir= bin/
@@ -15,7 +16,7 @@ PROG=Habitation_Location
 
 # Créer l'executable
 $(PROG): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -lm $(LDFLAGS)
 
 # Créer tous les fichiers .o
 bin/%.o : src/%.c
