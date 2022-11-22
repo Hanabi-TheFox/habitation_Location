@@ -106,6 +106,7 @@ Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habita
     // Le return doit être le tableau dataHabitation avec les distances calculées
     for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
         // On calcule la distance par rapport à nbr_personnes_acceuillables
+        dataHabitation[i].float_distance_acceuillables = distance((float)X->int_nbr_personnes_acceuillables, (float)dataHabitation[i].int_nbr_personnes_acceuillables); //juste pour tester avec 1 distance
         dataHabitation[i].float_distance[0] = distance((float)X->int_nbr_personnes_acceuillables, (float)dataHabitation[i].int_nbr_personnes_acceuillables);
         // On calcule la distance par rapport à nbr_chambre
         dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
