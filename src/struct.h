@@ -29,6 +29,7 @@ typedef struct Habitation{
 	int int_nombre_de_retour;
 	float float_distance_final;
     float float_distance[3];
+	float float_distance_acceuillables;
 }Habitation;
 
 #endif

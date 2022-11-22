@@ -49,7 +49,7 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
             while (token != NULL){
                 // On récupère l'id
                 if (i == 0){
-                    dataHabitation[j].int_id = atoi(token);
+                    dataHabitation[j].int_id = atoi(token); //atoi pour convertir car token contient une chaine
                 }
                 // On récupère le nombre de personnes acceuillables
                 if (i == 1){
@@ -84,7 +84,7 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
                     dataHabitation[j].int_nombre_de_retour = atoi(token);
                 }
                 // On récupère le prochain token
-                token = strtok(NULL, ",");
+                token = strtok(NULL, ","); 
                 i++;
             }
             i = 0;
