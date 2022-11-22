@@ -113,7 +113,7 @@ Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habita
         // On calcule la distance par rapport à nbr_lit
         dataHabitation[i].float_distance[2] = distance(X->float_nbr_lit, dataHabitation[i].float_nbr_lit);
         // On calcule la distance_final
-        dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2])/3);
+        dataHabitation[i].float_distance_final = sqrt((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
     }
 
     return *dataHabitation;
