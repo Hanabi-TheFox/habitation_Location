@@ -141,7 +141,7 @@ Habitation permutationAleatoire(Habitation *dataHabitation, int int_tailleData){
     return *dataHabitation;
 }
 
-/* On passe en commentaire le temps de tester les autres fonctions
+// On passe en commentaire le temps de tester les autres fonctions
 Habitation triDistance(Habitation *dataHabitation, int int_tailleData){
     triRapide(dataHabitation,int_tailleData); //trie recursivement dataHabitation selon les distances de similarité
     return(*dataHabitation);
@@ -179,14 +179,14 @@ int partition(Habitation *tab,int low, int hight) {
                                         //le pivot est maintenant place à la fin
     }
 
-    float pivot_value = tab[hight].float_distance; // tab[hight] est le pivot
+    float *p_pivot_value = &tab[hight].float_distance; // tab[hight] est le pivot
 
     int i = low; //pour prendre l'index d'un élement plus grand que le pivot pour permuter
                         //avec une valeur plus petite que le pivot
 
     for (int j = low; j < hight;j++) {
             
-            if ( tab[j].float_distance <= pivot_value ) {
+            if ( *(tab[j].float_distance) <= *(p_pivot_value) ) {
                 permuter(&tab[i],&tab[j]); // on permute la valeur
                 i++;
             }
@@ -197,7 +197,7 @@ int partition(Habitation *tab,int low, int hight) {
                                 //tab[i] est au final le pivot
     return i; //on retoune la position du pivot
 }
-*/
+
 
 float calculPrix(Habitation *dataHabitation, int int_K){
     // Sommer les prix des k lignes du tableau dataHabitation et dataHabitationRNG
