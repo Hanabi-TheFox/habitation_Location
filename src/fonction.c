@@ -31,7 +31,7 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
     fichier = fopen(char_NomFichier, "r");
     // Vérification du fopen
     if (fichier == NULL){
-        printf("Erreur lors de l'ouverture du fichier airbnb_donnees_propre.csv\n");
+        printf("Erreur lors de l'ouverture du fichier %s\n", char_NomFichier);
         exit(0);
     }
     char chaine[N] = "";
@@ -39,73 +39,67 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
     int j = 0;
     // On anticipe la taille du token
     char *token = malloc(100 * sizeof(char));
-    if (fichier != NULL){
-        // On saute la première ligne
-        fgets(chaine, N, fichier);
-        while (fgets(chaine, N, fichier) != NULL){
-            // On récupère le premier token
-            token = strtok(chaine, ",");
-            // On récupère les autres tokens
-            while (token != NULL){
-                // On récupère l'id
-                if (i == 0){
-                    dataHabitation[j].int_id = atoi(token); //atoi pour convertir car token contient une chaine
-                }
-                // On récupère le nombre de personnes acceuillables
-                if (i == 1){
-                    dataHabitation[j].int_nbr_personnes_acceuillables = atoi(token);
-                }
-                // On récupère le nombre de chambre
-                if (i == 2){
-                    dataHabitation[j].float_nbr_chambre = atof(token);
-                }
-                // On récupère le nombre de salle de bain
-                if (i == 3){
-                    dataHabitation[j].float_nbr_salle_de_bain = atof(token);
-                }
-                // On récupère le nombre de lit
-                if (i == 4){
-                    dataHabitation[j].float_nbr_lit = atof(token);
-                }
-                // On récupère le prix
-                if (i == 5){
-                    dataHabitation[j].float_prix = atof(token);
-                }
-                // On récupère le nombre de nuit minimum
-                if (i == 6){
-                    dataHabitation[j].int_nuit_minimum = atoi(token);
-                }
-                // On récupère le nombre de nuit maximum
-                if (i == 7){
-                    dataHabitation[j].int_nuit_maximum = atoi(token);
-                }
-                // On récupère le nombre de retour
-                if (i == 8){
-                    dataHabitation[j].int_nombre_de_retour = atoi(token);
-                }
-                // On récupère le prochain token
-                token = strtok(NULL, ","); 
-                i++;
+    // On saute la première ligne
+    fgets(chaine, N, fichier);
+    while (fgets(chaine, N, fichier) != NULL){
+        // On récupère le premier token
+        token = strtok(chaine, ",");
+        // On récupère les autres tokens
+        while (token != NULL){
+            // On récupère l'id
+            if (i == 0){
+                dataHabitation[j].int_id = atoi(token); //atoi pour convertir car token contient une chaine
             }
-            i = 0;
-            j++;
+            // On récupère le nombre de personnes acceuillables
+            if (i == 1){
+                dataHabitation[j].int_nbr_personnes_acceuillables = atoi(token);
+            }
+            // On récupère le nombre de chambre
+            if (i == 2){
+                dataHabitation[j].float_nbr_chambre = atof(token);
+            }
+            // On récupère le nombre de salle de bain
+            if (i == 3){
+                dataHabitation[j].float_nbr_salle_de_bain = atof(token);
+            }
+            // On récupère le nombre de lit
+            if (i == 4){
+                dataHabitation[j].float_nbr_lit = atof(token);
+            }
+            // On récupère le prix
+            if (i == 5){
+                dataHabitation[j].float_prix = atof(token);
+            }
+            // On récupère le nombre de nuit minimum
+            if (i == 6){
+                dataHabitation[j].int_nuit_minimum = atoi(token);
+            }
+            // On récupère le nombre de nuit maximum
+            if (i == 7){
+                dataHabitation[j].int_nuit_maximum = atoi(token);
+            }
+            // On récupère le nombre de retour
+            if (i == 8){
+                dataHabitation[j].int_nombre_de_retour = atoi(token);
+            }
+            // On récupère le prochain token
+            token = strtok(NULL, ","); 
+            i++;
         }
-        fclose(fichier);
-        // On libère la mémoire
-        free(token);
-        return *dataHabitation;
+        i = 0;
+        j++;
     }
+    fclose(fichier);
+    // On libère la mémoire
+    free(token);
     return *dataHabitation;
 }
 
 void affichage(Habitation *dataHabitation, int int_taille){
     for(int i = 0; i < int_taille; i++){
-            //printf("%d, %d, %f, %f, %f, %f, %d, %d, %d, D = %f", dataHabitation[i].int_id, dataHabitation[i].int_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].int_nuit_minimum, dataHabitation[i].int_nuit_maximum, dataHabitation[i].int_nombre_de_retour, dataHabitation[i].float_distance_final);
-            // On affiche uniquement le prix et la distance.
-            printf("Prix = %f, D = %f\n", dataHabitation[i].float_prix, dataHabitation[i].float_distance_final);
-        }
+            printf("%d, %d, %f, %f, %f, %f, %d, %d, %d, D = %f\n", dataHabitation[i].int_id, dataHabitation[i].int_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].int_nuit_minimum, dataHabitation[i].int_nuit_maximum, dataHabitation[i].int_nombre_de_retour, dataHabitation[i].float_distance_final);
+            }
 }
-
 
 Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habitation *X){
     for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs

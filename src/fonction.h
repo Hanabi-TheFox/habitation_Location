@@ -23,7 +23,6 @@ Habitation permutationAleatoire(Habitation *dataHabitation, int int_tailleData);
 Habitation triRapide(Habitation *dataHabitation, int int_tailleData);
 void triRapideRecursif(Habitation *dataHabitation, int int_debut, int int_fin);
 int triRapidePartition(Habitation *dataHabitation, int int_debut, int int_fin);
-Habitation triDistance(Habitation *dataHabitation, int int_tailleData);
 // Fonction calculant le prix moyen des deux tableaux afin de donner 
 // le prix prédit du logement X.
-float calculPrix(Habitation *dataHabitation, int int_K); // A TESTER
+float calculPrix(Habitation *dataHabitation, int int_K);

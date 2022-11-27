@@ -29,10 +29,10 @@ int main(){
         // Habitation candidat dont on cherche à déterminer le prix
         Habitation X;
         X.int_id = 5555;
-        X.int_nbr_personnes_acceuillables = 2;
-        X.float_nbr_chambre = 1;
-        X.float_nbr_salle_de_bain = 1;
-        X.float_nbr_lit = 1;
+        X.int_nbr_personnes_acceuillables = 4;
+        X.float_nbr_chambre = 3;
+        X.float_nbr_salle_de_bain = 2;
+        X.float_nbr_lit = 3;
         //X.float_prix n'est pas connu.
         X.int_nuit_minimum = 1;
         X.int_nuit_maximum = 12;
@@ -62,34 +62,37 @@ int main(){
     }
     else if (Bonus == 1)
     {
-        /* (On va laisser la partie bonus en commentaire tant que la partie de base n'est pas fini)
+        /*
         // BONUS
         printf("Partie Bonus : Evaluation de la performance du modèle de prédiction\n\n");
         // Déclaration des variables
-        int sizedata = tailledata("data/airbnbEntrainement.csv");
-        if(sizedata = 0){
+        int int_tailledata = tailledata("data/airbnbEntrainement.csv");
+        if(int_tailledata == 0){
             printf("Erreur lors de la lecture du fichier airbnbEntrainement.csv\n");
             printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
             exit(0);
         }
         // Tableau contenant les données du fichier airbnbEntrainement.csv
-        Habitation *tabEntrainement = malloc(sizedata * sizeof(Habitation));
+        Habitation *tabEntrainement = malloc(int_tailledata * sizeof(Habitation));
         if (tabEntrainement == NULL){
             printf("Erreur d'allocation mémoire");
             exit(1);
         }
+        *tabEntrainement = lecturedata(tabEntrainement, "data/airbnbEntrainement.csv");
+        affichage(tabEntrainement, int_tailledata);
+
         // On va calculer le MAE pour toutes les valeurs de K possible de 0 à K_max.
-        int K_max = sizedata;
-        int sizedata = tailledata("data/airbnbTest.csv");
-        if(sizedata = 0){
+        int K_max = int_tailledata;
+        int_tailledata = tailledata("data/airbnbTest.csv");
+        if(int_tailledata = 0){
             printf("Erreur lors de la lecture du fichier airbnbTest.csv\n");
             printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
             exit(0);
         }
         // Tableau contenant les données du fichier airbnbTest.csv
-        Habitation *tabTest = malloc(sizedata * sizeof(Habitation));
+        Habitation *tabTest = malloc(int_tailledata * sizeof(Habitation));
         // On créer un tableau de la même taille que le tableau de test qui contiendra les prix prédits
-        float *tabPrediction = malloc(sizedata * sizeof(float));
+        float *tabPrediction = malloc(int_tailledata * sizeof(float));
         if (tabTest == NULL){
             printf("Erreur d'allocation mémoire");
             exit(1);
@@ -105,12 +108,12 @@ int main(){
         // Trouver la valeur de k qui donne le meilleur MAE (celle avec la MAE la plus faible)
         // --> On cherche le minimum du tableau
         
-        // On libère la mémoire
-        free(tabEntrainement);
-        free(tabTest);
-        free(tabPrediction);
-        free(tabMAE);
         */
+        // On libère la mémoire
+        //free(tabEntrainement);
+        //free(tabTest);
+        //free(tabPrediction);
+        //free(tabMAE);
     }
 	return(0);
 
