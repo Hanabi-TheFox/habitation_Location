@@ -98,22 +98,26 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
     return *dataHabitation;
 }
 
+void affichage(Habitation *dataHabitation, int int_taille){
+    for(int i = 0; i < int_taille; i++){
+            //printf("%d, %d, %f, %f, %f, %f, %d, %d, %d, D = %f", dataHabitation[i].int_id, dataHabitation[i].int_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].int_nuit_minimum, dataHabitation[i].int_nuit_maximum, dataHabitation[i].int_nombre_de_retour, dataHabitation[i].float_distance_final);
+            // On affiche uniquement le prix et la distance.
+            printf("Prix = %f, D = %f\n", dataHabitation[i].float_prix, dataHabitation[i].float_distance_final);
+        }
+}
+
+
 Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habitation *X){
-    // Faire le calcul pour les nbr_personnes_acceuillables
-    // ( /!\ Penser à convertir les entiers en float car les fonctions math.h ne lise pas d'entiers)
-    // Une fois que tout fonctionne, il faudra aussi le faire pour nbr_chambre et nbr_lit et donc
-    // changer la variable distance dans la structure Habitation pour en faire un tableau de taille 3
-    // Le return doit être le tableau dataHabitation avec les distances calculées
     for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
         // On calcule la distance par rapport à nbr_personnes_acceuillables
-        dataHabitation[i].float_distance_acceuillables = distance((float)X->int_nbr_personnes_acceuillables, (float)dataHabitation[i].int_nbr_personnes_acceuillables); //juste pour tester avec 1 distance
         dataHabitation[i].float_distance[0] = distance((float)X->int_nbr_personnes_acceuillables, (float)dataHabitation[i].int_nbr_personnes_acceuillables);
         // On calcule la distance par rapport à nbr_chambre
         dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
         // On calcule la distance par rapport à nbr_lit
         dataHabitation[i].float_distance[2] = distance(X->float_nbr_lit, dataHabitation[i].float_nbr_lit);
-        // On calcule la distance_final
-        dataHabitation[i].float_distance_final = sqrt((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+        // On calcule la distance_final qui est la racine carré de la somme des carrés des distances
+        dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+        dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
     }
 
     return *dataHabitation;
@@ -124,7 +128,6 @@ float distance(float float_X, float float_Y){
     // On calcule la distance entre float_x et float_y
 
     distance = pow(float_X - float_Y,2) ; //(x - y)²
-    distance = sqrt(distance); 
     return distance;
 }
 
@@ -141,61 +144,36 @@ Habitation permutationAleatoire(Habitation *dataHabitation, int int_tailleData){
     return *dataHabitation;
 }
 
-// On passe en commentaire le temps de tester les autres fonctions
-Habitation triDistance(Habitation *dataHabitation, int int_tailleData){
-    triRapide(dataHabitation,int_tailleData); //trie recursivement dataHabitation selon les distances de similarité
-    return(*dataHabitation);
+// On trie les données par distance en utilisant le tri rapide
+Habitation triRapide(Habitation *dataHabitation, int int_tailleData){
+    // On trie les données
+    triRapideRecursif(dataHabitation, 0, int_tailleData-1);
+    return *dataHabitation;
 }
 
-void permuter(Habitation *a,Habitation *b) {
-    Habitation tmp = *a; //la valeur de la variable qui pointe a est affecté à 'tmp'
-    *a = *b;
-    *b = tmp;  //permutation simple entre 'a' et 'b'
-}
-
-void triRapide(Habitation *tab, int length) {
-
-    srand( time(NULL) );
-    triRapideRecursive(tab,0,length-1); //appel de la fonction recursive
-
-}
-
-void triRapideRecursive(Habitation *tab, int low, int hight){
-
-    if (low < hight) { //si l'élement de gauche est encore plus petit que l'élement de droite
-        //on arrete quand low > hight
-    int pivot_index = partition(tab,low,hight);
-    triRapideRecursive(tab,low,pivot_index-1);
-    triRapideRecursive(tab,pivot_index+1,hight);
+void triRapideRecursif(Habitation *dataHabitation, int int_debut, int int_fin){
+    if (int_debut < int_fin){
+        int int_pivot = triRapidePartition(dataHabitation, int_debut, int_fin);
+        triRapideRecursif(dataHabitation, int_debut, int_pivot-1);
+        triRapideRecursif(dataHabitation, int_pivot+1, int_fin);
     }
 }
 
-int partition(Habitation *tab,int low, int hight) {
-
-    int pivot_index = low + ( rand() % (hight-low)); //on prend un index pour le pivot aleatoire
-
-    if (pivot_index != hight) { //si l'index n'est pas deja le dernier
-        swap(&tab[pivot_index],&tab[hight]); //on permute le pivot avec le dernier élement
-                                        //le pivot est maintenant place à la fin
+int triRapidePartition(Habitation *dataHabitation, int int_debut, int int_fin){
+    float float_pivot = dataHabitation[int_fin].float_distance_final;
+    int int_i = int_debut-1;
+    for (int int_j = int_debut; int_j < int_fin; int_j++){
+        if (dataHabitation[int_j].float_distance_final <= float_pivot){
+            int_i++;
+            Habitation temp = dataHabitation[int_i];
+            dataHabitation[int_i] = dataHabitation[int_j];
+            dataHabitation[int_j] = temp;
+        }
     }
-
-    float *p_pivot_value = &tab[hight].float_distance; // tab[hight] est le pivot
-
-    int i = low; //pour prendre l'index d'un élement plus grand que le pivot pour permuter
-                        //avec une valeur plus petite que le pivot
-
-    for (int j = low; j < hight;j++) {
-            
-            if ( *(tab[j].float_distance) <= *(p_pivot_value) ) {
-                permuter(&tab[i],&tab[j]); // on permute la valeur
-                i++;
-            }
-
-    }
-    swap(&tab[i],&tab[hight]); //tab[i] marque l'élement qui partitionne le tableau
-                                //donc on permute avec le pivot à la fin
-                                //tab[i] est au final le pivot
-    return i; //on retoune la position du pivot
+    Habitation temp = dataHabitation[int_i+1];
+    dataHabitation[int_i+1] = dataHabitation[int_fin];
+    dataHabitation[int_fin] = temp;
+    return int_i+1;
 }
 
 

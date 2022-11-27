@@ -40,27 +40,22 @@ int main(){
 
         // Lecture du fichier airbnb_donees_propre.csv
         *dataHabitation = lecturedata(dataHabitation, "data/airbnb_donnees_propre.csv");
-        /*
+        
         // Calcul de la distance entre le candidat et les logements de la base de donnée
-        *dataHabitation = calculdistance(dataHabitation, int_tailledata, &X); */
+        *dataHabitation = calculdistance(dataHabitation, int_tailledata, &X); 
 
         // Permutation des données du tableau dataHabitation
         *dataHabitation = permutationAleatoire(dataHabitation, int_tailledata);
 
-        /*
-        // Tri du tableau dataHabitation
-        *dataHabitation = triDistance(dataHabitation);
+        // On trie le tableau dataHabitation
+        *dataHabitation = triRapide(dataHabitation, int_tailledata);
 
         // Calcul du prix du logement
         int int_K = k;
-        X.float_prix = calculprix(dataHabitation, int_K);
-        */
-
-        // TODO : - Calculer la distance euclienne du teableau dataHabitation par rapport à X.
-        // Tester le programme en faisant varier k
-        // Faire d'autre modèle utilisant une autre variable pour le calcul de la distance.
-        // -> changer le "float float_distance" en "float float_distance[3]"
-        // Pour respectivement : nbr_personnes_aceuillable, nbr_chambres et nbr_lit
+        X.float_prix = calculPrix(dataHabitation, int_K);
+        
+        // Affichage du prix du logement
+        printf("En utilisant k = %d, le prix prédit du logement est de %f\n", int_K, X.float_prix);
 
         // On libère la mémoire
         free(dataHabitation);
