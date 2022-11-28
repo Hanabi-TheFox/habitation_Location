@@ -52,7 +52,7 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
             }
             // On récupère le nombre de personnes acceuillables
             if (i == 1){
-                dataHabitation[j].int_nbr_personnes_acceuillables = atoi(token);
+                dataHabitation[j].float_nbr_personnes_acceuillables = atof(token);
             }
             // On récupère le nombre de chambre
             if (i == 2){
@@ -72,15 +72,15 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
             }
             // On récupère le nombre de nuit minimum
             if (i == 6){
-                dataHabitation[j].int_nuit_minimum = atoi(token);
+                dataHabitation[j].float_nuit_minimum = atof(token);
             }
             // On récupère le nombre de nuit maximum
             if (i == 7){
-                dataHabitation[j].int_nuit_maximum = atoi(token);
+                dataHabitation[j].float_nuit_maximum = atof(token);
             }
             // On récupère le nombre de retour
             if (i == 8){
-                dataHabitation[j].int_nombre_de_retour = atoi(token);
+                dataHabitation[j].float_nombre_de_retour = atof(token);
             }
             // On récupère le prochain token
             token = strtok(NULL, ","); 
@@ -97,14 +97,14 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
 
 void affichage(Habitation *dataHabitation, int int_taille){
     for(int i = 0; i < int_taille; i++){
-            printf("%d, %d, %f, %f, %f, %f, %d, %d, %d, D = %f\n", dataHabitation[i].int_id, dataHabitation[i].int_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].int_nuit_minimum, dataHabitation[i].int_nuit_maximum, dataHabitation[i].int_nombre_de_retour, dataHabitation[i].float_distance_final);
+            printf("%d, %f %f, %f, %f, %f, %f, %f, %f, D = %f\n", dataHabitation[i].int_id, dataHabitation[i].float_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].float_nuit_minimum, dataHabitation[i].float_nuit_maximum, dataHabitation[i].float_nombre_de_retour, dataHabitation[i].float_distance_final);
             }
 }
 
 Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habitation *X){
     for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
         // On calcule la distance par rapport à nbr_personnes_acceuillables
-        dataHabitation[i].float_distance[0] = distance((float)X->int_nbr_personnes_acceuillables, (float)dataHabitation[i].int_nbr_personnes_acceuillables);
+        dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
         // On calcule la distance par rapport à nbr_chambre
         dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
         // On calcule la distance par rapport à nbr_lit

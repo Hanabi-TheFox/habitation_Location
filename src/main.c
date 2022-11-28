@@ -28,15 +28,15 @@ int main(){
 
         // Habitation candidat dont on cherche à déterminer le prix
         Habitation X;
-        X.int_id = 5555;
-        X.int_nbr_personnes_acceuillables = 4;
+        X.int_id = 5555; //on choisit le candidat (logement) d'indice 5555
+        X.float_nbr_personnes_acceuillables = 4;
         X.float_nbr_chambre = 3;
         X.float_nbr_salle_de_bain = 2;
         X.float_nbr_lit = 3;
         //X.float_prix n'est pas connu.
-        X.int_nuit_minimum = 1;
-        X.int_nuit_maximum = 12;
-        X.int_nombre_de_retour = 21;
+        X.float_nuit_minimum = 1;
+        X.float_nuit_maximum = 12;
+        X.float_nombre_de_retour = 21;
 
         // Lecture du fichier airbnb_donees_propre.csv
         *dataHabitation = lecturedata(dataHabitation, "data/airbnb_donnees_propre.csv");
@@ -57,12 +57,11 @@ int main(){
         // Affichage du prix du logement
         printf("En utilisant k = %d, le prix prédit du logement est de %f\n", int_K, X.float_prix);
 
-        // On libère la mémoire
         free(dataHabitation);
     }
     else if (Bonus == 1)
     {
-        /*
+     /*
         // BONUS
         printf("Partie Bonus : Evaluation de la performance du modèle de prédiction\n\n");
         // Déclaration des variables
@@ -80,6 +79,7 @@ int main(){
         }
         *tabEntrainement = lecturedata(tabEntrainement, "data/airbnbEntrainement.csv");
         affichage(tabEntrainement, int_tailledata);
+
 
         // On va calculer le MAE pour toutes les valeurs de K possible de 0 à K_max.
         int K_max = int_tailledata;

@@ -18,16 +18,16 @@
 #include <time.h>
 // Définition de la structure "Habitation"
 typedef struct Habitation{
-	int int_id;
-	int int_nbr_personnes_acceuillables;
+	int int_id; //pas besoin d'etre en entier car l'id est toujours un entier dans les fichiers .csv
+	float float_nbr_personnes_acceuillables;
 	float float_nbr_chambre;
 	float float_nbr_salle_de_bain;
 	float float_nbr_lit;
 	float float_prix;
-	int int_nuit_minimum;
-	int int_nuit_maximum;
-	int int_nombre_de_retour;
-    float float_distance[3];
+	float float_nuit_minimum;
+	float float_nuit_maximum;
+	float float_nombre_de_retour;
+    float float_distance[3]; //par rapport au candidat(logement) X
 	float float_distance_final;
 }Habitation;
 
