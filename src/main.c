@@ -53,6 +53,8 @@ int main(){
         // Calcul du prix du logement
         int int_K = k;
         X.float_prix = calculPrix(dataHabitation, int_K);
+
+        //affichage(dataHabitation, int_tailledata);
         
         // Affichage du prix du logement
         printf("En utilisant k = %d, le prix prédit du logement est de %f\n", int_K, X.float_prix);
@@ -61,7 +63,7 @@ int main(){
     }
     else if (Bonus == 1)
     {
-     /*
+     
         // BONUS
         printf("Partie Bonus : Evaluation de la performance du modèle de prédiction\n\n");
         // Déclaration des variables
@@ -78,25 +80,58 @@ int main(){
             exit(1);
         }
         *tabEntrainement = lecturedata(tabEntrainement, "data/airbnbEntrainement.csv");
-        affichage(tabEntrainement, int_tailledata);
-
-
+        //printf("Affichage tableau tabEntrainement\n \n");
+        //affichage(tabEntrainement, int_tailledata);
         // On va calculer le MAE pour toutes les valeurs de K possible de 0 à K_max.
         int K_max = int_tailledata;
-        int_tailledata = tailledata("data/airbnbTest.csv");
-        if(int_tailledata = 0){
+        int int_tailledataTabTest = tailledata("data/airbnbTest.csv");
+        if(int_tailledataTabTest == 0){
             printf("Erreur lors de la lecture du fichier airbnbTest.csv\n");
             printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
             exit(0);
         }
         // Tableau contenant les données du fichier airbnbTest.csv
-        Habitation *tabTest = malloc(int_tailledata * sizeof(Habitation));
+        Habitation *tabTest = malloc(int_tailledataTabTest * sizeof(Habitation));
+        *tabTest = lecturedata(tabTest,"data/airbnbTest.csv");
+        //printf("Affichage tableau tabTest\n \n");
+        //affichage(tabTest, int_tailledata);
+      
         // On créer un tableau de la même taille que le tableau de test qui contiendra les prix prédits
-        float *tabPrediction = malloc(int_tailledata * sizeof(float));
+        float *tabPrediction = malloc(int_tailledataTabTest * sizeof(float));
         if (tabTest == NULL){
-            printf("Erreur d'allocation mémoire");
+            printf("Erreur d'allocation mémoire pour tabTest");
             exit(1);
         }
+
+        // QUESTION g) POUR LE CALCUL DES PRIX PREDIT EN DONNANT COMME RESULTAT
+        //tabPredit AYANT LES PRIX FRUITS DU RESULTAT DES PRIX MOYENS POUR CHAQUE   
+        //LOGEMENT CANDIDAT X = tabTest[i] ET LES LOGEMENTS DANS tabEntrainement
+
+        //X = tabTest[i] : on applique l'algorithme avec tous les tabEntrainement
+        //pour ce dandidat et on stock dans tabPredit[i] 
+/*
+        for (int i=0;i<int_tailledataTabTest;i++) {
+ 
+        *tabEntrainement = calculdistance(tabEntrainement, int_tailledata, &tabTest[i]); 
+
+        // Permutation des données du tableau dataHabitation
+        *tabEntrainement = permutationAleatoire(tabEntrainement, int_tailledata);
+
+        // On trie le tableau dataHabitation
+        *tabEntrainement = triRapide(tabEntrainement, int_tailledata);
+
+        // Calcul du prix du logement
+        int int_K = k;
+        tabTest[i].float_prix = calculPrix(dataHabitation, int_K);
+        }
+            
+
+
+        }
+
+
+
+        //PARTIE MAE
         // On créer le tableau qui contiendra les MAE pour chaque valeur de K
         // l'indice du tableau est la quantité de K, et sa valeur sera la valeur du MAE associée
         float *tabMAE = malloc(K_max * sizeof(float));
@@ -109,9 +144,11 @@ int main(){
         // --> On cherche le minimum du tableau
         
         */
+
+       
         // On libère la mémoire
-        //free(tabEntrainement);
-        //free(tabTest);
+        free(tabEntrainement);
+        free(tabTest);
         //free(tabPrediction);
         //free(tabMAE);
     }

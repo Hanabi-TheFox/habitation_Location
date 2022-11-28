@@ -68,19 +68,44 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
             }
             // On récupère le prix
             if (i == 5){
+                if (Bonus == 1) { //si on est dans la partie bonus
+                    //à cause des attributs inversés dans les
+                    //fichiers airbnbEntrainement
+                    //et airbnbTest:  minimum_night prend la place de prix qui est à la fin
+                dataHabitation[j].float_nuit_minimum = atof(token);
+                }
+                else { 
+                
                 dataHabitation[j].float_prix = atof(token);
+            }
             }
             // On récupère le nombre de nuit minimum
             if (i == 6){
+                if (Bonus == 1) {
+                    dataHabitation[j].float_nuit_maximum = atof(token);
+                }
+
+                else {
                 dataHabitation[j].float_nuit_minimum = atof(token);
+                }
             }
             // On récupère le nombre de nuit maximum
             if (i == 7){
+                if (Bonus ==1) {
+                dataHabitation[j].float_nombre_de_retour = atof(token);
+                }
+                else {
                 dataHabitation[j].float_nuit_maximum = atof(token);
+                }
             }
             // On récupère le nombre de retour
             if (i == 8){
+                if (Bonus ==1) {
+                    dataHabitation[j].float_prix = atof(token);
+                }
+                else {
                 dataHabitation[j].float_nombre_de_retour = atof(token);
+                }
             }
             // On récupère le prochain token
             token = strtok(NULL, ","); 
