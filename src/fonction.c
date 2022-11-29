@@ -4,7 +4,7 @@
 
 // Fichier dans lequel seront écrits toutes les fonctions déclarés par fonction.h
 #include "fonction.h"
-#define N 80
+#define N 200
 
 int tailledata(char *char_NomFichier){
     FILE *fichier = NULL;

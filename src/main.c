@@ -104,32 +104,37 @@ int main(){
         }
 
         // QUESTION g) POUR LE CALCUL DES PRIX PREDIT EN DONNANT COMME RESULTAT
-        //tabPredit AYANT LES PRIX FRUITS DU RESULTAT DES PRIX MOYENS POUR CHAQUE   
+        //tabPrediction AYANT LES PRIX FRUITS DU RESULTAT DES PRIX MOYENS POUR CHAQUE   
         //LOGEMENT CANDIDAT X = tabTest[i] ET LES LOGEMENTS DANS tabEntrainement
 
         //X = tabTest[i] : on applique l'algorithme avec tous les tabEntrainement
         //pour ce dandidat et on stock dans tabPredit[i] 
-/*
-        for (int i=0;i<int_tailledataTabTest;i++) {
+
+
+     for (int i=0;i<int_tailledataTabTest;i++) {
  
         *tabEntrainement = calculdistance(tabEntrainement, int_tailledata, &tabTest[i]); 
 
         // Permutation des données du tableau dataHabitation
-        *tabEntrainement = permutationAleatoire(tabEntrainement, int_tailledata);
+        *tabEntrainement = permutationAleatoire(tabEntrainement, int_tailledata); //tailledata = taille de tabEntrainement
 
         // On trie le tableau dataHabitation
         *tabEntrainement = triRapide(tabEntrainement, int_tailledata);
 
         // Calcul du prix du logement
-        int int_K = k;
-        tabTest[i].float_prix = calculPrix(dataHabitation, int_K);
+        int int_K = k; // k logements à comparer avec le logement X = tabTest[i]
+        tabTest[i].float_prix = calculPrix(tabEntrainement, int_K);
+        tabPrediction[i] = tabTest[i].float_prix;
+        printf("tabPrediction[%d] = %f\n",i, tabPrediction[i]);
         }
-            
+        
+        printf("Affichage tableau tabPrediction\n \n");
+    
+        printf("FIN PROGRAMME");
 
+        
 
-        }
-
-
+        /*
 
         //PARTIE MAE
         // On créer le tableau qui contiendra les MAE pour chaque valeur de K
@@ -143,13 +148,13 @@ int main(){
         // Trouver la valeur de k qui donne le meilleur MAE (celle avec la MAE la plus faible)
         // --> On cherche le minimum du tableau
         
-        */
-
+        
+*/
        
         // On libère la mémoire
         free(tabEntrainement);
         free(tabTest);
-        //free(tabPrediction);
+        free(tabPrediction);
         //free(tabMAE);
     }
 	return(0);
