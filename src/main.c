@@ -160,8 +160,17 @@ int main(){
         }
 
         //CALCUL MAE MODELE 3 categories avec 'k' défini dans struct.h
+        //https://en.wikipedia.org/wiki/Mean_absolute_error
+        float float_MAE;
+        for (int i=0;i<int_tailledataTabTest;i++) {
+            float tmp = tabPrix[i].float_prix_predit - tabPrix[i].float_prix_reel;
+            tmp = fabs(tmp); // on prend la valeur absolue
+            float_MAE += tmp;
+        }
 
-        
+        float_MAE = float_MAE / int_tailledataTabTest;
+
+        printf("Notre MAE pour le modele 3 categories et k = %d vaut MAE = %f\n",int_K,float_MAE);
 
         printf("FIN PROGRAMME");
 
