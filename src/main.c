@@ -110,7 +110,8 @@ int main(){
         //X = tabTest[i] : on applique l'algorithme avec tous les tabEntrainement
         //pour ce dandidat et on stock dans tabPredit[i] 
 
-
+      printf("Affichage tableau tabPrediction\n \n");
+     
      for (int i=0;i<int_tailledataTabTest;i++) {
  
         *tabEntrainement = calculdistance(tabEntrainement, int_tailledata, &tabTest[i]); 
@@ -123,23 +124,46 @@ int main(){
 
         // Calcul du prix du logement
         int int_K = k; // k logements à comparer avec le logement X = tabTest[i]
-        tabTest[i].float_prix = calculPrix(tabEntrainement, int_K);
-        tabPrediction[i] = tabTest[i].float_prix;
+        tabPrediction[i] = calculPrix(tabEntrainement,int_K);
         printf("tabPrediction[%d] = %f\n",i, tabPrediction[i]);
         }
+
         
-        printf("Affichage tableau tabPrediction\n \n");
     
-        printf("FIN PROGRAMME");
-
         
-
-        /*
 
         //PARTIE MAE
         // On créer le tableau qui contiendra les MAE pour chaque valeur de K
         // l'indice du tableau est la quantité de K, et sa valeur sera la valeur du MAE associée
         float *tabMAE = malloc(K_max * sizeof(float));
+
+        printf("PARTIE BONUS : Question (h): calcul de la MAE pour le modele avec 3 categories\n");
+        printf("Les categories sont les suviantes : \n \n");
+        printf("1 - Nombre de personnes accueillables\n");
+        printf("2 - Nombre de chambres \n");
+        printf("3 - Nombre de lits\n");
+        int int_K = k;
+        printf("Nous ferons ce modele avec k = %d(constante dans fichier le struct.h)\n",int_K);
+        printf("Ce 'k' = %d a été utilisée pour calculer les prix prédits dans la question (g)\n",int_K);
+
+        //TabPrix contenant pour chaque case les valeur de prix réel et prix prédit
+    
+        Prix *tabPrix = malloc(int_tailledataTabTest * sizeof(Prix));
+
+        for (int i=0;i<int_tailledataTabTest;i++) {
+            tabPrix[i].float_prix_reel = tabTest[i].float_prix; //number_of_review a devenu prix à cause du decalage des attributs dans les fichiers airbnbEntrainement et airbnbTest
+            tabPrix[i].float_prix_predit = tabPrediction[i];        
+        }
+
+        for (int i=0;i<int_tailledataTabTest;i++) {
+            printf("TabPrix[%d] rééel = %f | TabPrix[%d] prédit = %f\n",i,tabPrix[i].float_prix_reel,i,tabPrix[i].float_prix_predit = tabPrediction[i]);
+        }
+
+        //CALCUL MAE MODELE 3 categories avec 'k' défini dans struct.h
+
+        
+
+        printf("FIN PROGRAMME");
 
         // TODO : - Calculer la distance euclienne du tableau tabEntrainement par rapport à chaque habitation de tabTest.
         // Mettre les prix prédits dans le tableau tabPrediction
@@ -148,14 +172,12 @@ int main(){
         // Trouver la valeur de k qui donne le meilleur MAE (celle avec la MAE la plus faible)
         // --> On cherche le minimum du tableau
         
-        
-*/
-       
         // On libère la mémoire
         free(tabEntrainement);
         free(tabTest);
         free(tabPrediction);
-        //free(tabMAE);
+        free(tabPrix);
+        free(tabMAE);
     }
 	return(0);
 

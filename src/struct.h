@@ -31,4 +31,10 @@ typedef struct Habitation{
 	float float_distance_final;
 }Habitation;
 
+typedef struct Prix{
+	float float_prix_reel; //valeur de prix reel contenu dans tabTest
+	float float_prix_predit; // valeur de prix prédit contenu dans tabPrediction
+
+}Prix;
+
 #endif
