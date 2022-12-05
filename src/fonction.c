@@ -127,6 +127,7 @@ void affichage(Habitation *dataHabitation, int int_taille){
 }
 
 Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habitation *X){
+
     for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
         // On calcule la distance par rapport à nbr_personnes_acceuillables
         dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
@@ -140,6 +141,113 @@ Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habita
     }
 
     return *dataHabitation;
+}
+
+Habitation calculdistanceBonus(Habitation *dataHabitation, int int_tailleData, Habitation *X,int int_numero_modele){
+// On calcule distance pour le modele 1
+    if ( int_numero_modele == 1) {
+ for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
+        // On calcule la distance par rapport à nbr_personnes_acceuillables
+        dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
+        // On calcule la distance par rapport à nbr_chambre
+        dataHabitation[i].float_distance[1] = 0; // on ne calcule pas pour une categorie
+        // On calcule la distance par rapport à nbr_lit
+        dataHabitation[i].float_distance[2] = 0; // on ne calcule pas pour une categorie
+        // On calcule la distance_final qui est la racine carré de la somme des carrés des distances
+        dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+        dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
+    }
+
+    return *dataHabitation;
+    }
+
+
+//on calcule la distace pour le modele 2
+if (int_numero_modele == 2) {
+    for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
+        // On calcule la distance par rapport à nbr_personnes_acceuillables
+        dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
+        // On calcule la distance par rapport à nbr_chambre
+        dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
+        // On calcule la distance par rapport à nbr_lit
+        dataHabitation[i].float_distance[2] = 0; // on ne calcule pas pour deux categorie
+        // On calcule la distance_final qui est la racine carré de la somme des carrés des distances
+        dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+        dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
+    }
+
+    return *dataHabitation;
+    }
+
+
+if (int_numero_modele == 3) {
+// On calcule distance 3*/
+    for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
+        // On calcule la distance par rapport à nbr_personnes_acceuillables
+        dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
+        // On calcule la distance par rapport à nbr_chambre
+        dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
+        // On calcule la distance par rapport à nbr_lit
+        dataHabitation[i].float_distance[2] = distance(X->float_nbr_lit, dataHabitation[i].float_nbr_lit);
+        // On calcule la distance_final qui est la racine carré de la somme des carrés des distances
+        dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+        dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
+    }
+    return *dataHabitation;
+    
+}
+
+else {
+    //un soucis c'est passée
+    printf("Probleme avec la fonction CalculDistanceBonus \nMessage ERRNO ; %s",strerror(errno));
+}
+
+return *dataHabitation;
+
+}
+
+float calculMAE(Habitation *tabEntrainement,int int_tailleTabEntrainement, Habitation *tabTest,int int_tailleTabTest, float *tabPrediction,Prix *tabPrix,int modele,int a) {
+    for (int i=0;i<int_tailleTabTest;i++) {
+ 
+        //on passe les parametres pour le calcul distance dans la partie bonus
+        //on doit passer le tabEntrainement, sa taille, les candidats dans tabTest et le modele choisi (1,2 ou 3);
+        *tabEntrainement = calculdistanceBonus(tabEntrainement, int_tailleTabEntrainement, &tabTest[i],modele); 
+        
+        // Permutation des données du tableau On trie le tableau tabEntrainement
+        *tabEntrainement = permutationAleatoire(tabEntrainement, int_tailleTabEntrainement); //tailledata = taille de tabEntrainement
+
+        // On trie le tableau tabEntrainement
+        *tabEntrainement = triRapide(tabEntrainement, int_tailleTabEntrainement);
+
+        // Calcul du prix du logement
+        int int_K = a; // k logements à comparer avec le logement X = tabTest[i]
+        tabPrediction[i] = calculPrix(tabEntrainement,int_K);
+       // printf("tabPrediction[%d] = %f\n",i, tabPrediction[i]);
+        }
+
+        //PARTIE MAE
+        // On crée le tableau qui contiendra les MAE pour chaque valeur de K
+        // l'indice du tableau est la quantité de K, et sa valeur sera la valeur du MAE associée
+        //float *tabMAE = malloc(K_max * sizeof(float));
+
+        for (int i=0;i<int_tailleTabTest;i++) {
+            tabPrix[i].float_prix_reel = tabTest[i].float_prix; //number_of_review a devenu prix à cause du decalage des attributs dans les fichiers airbnbEntrainement et airbnbTest
+            tabPrix[i].float_prix_predit = tabPrediction[i];        
+        }
+        /*for (int i=0;i<int_tailleTabTest;i++) {
+            printf("TabPrix[%d] rééel = %f | TabPrix[%d] prédit = %f\n",i,tabPrix[i].float_prix_reel,i,tabPrix[i].float_prix_predit = tabPrediction[i]);
+        }*/
+
+        float float_MAE;
+        for (int i=0;i<int_tailleTabTest;i++) {
+            float tmp = tabPrix[i].float_prix_predit - tabPrix[i].float_prix_reel;
+            tmp = fabs(tmp); // on prend la valeur absolue
+            float_MAE += tmp;
+        }
+
+        float_MAE = float_MAE / int_tailleTabTest;
+
+        return float_MAE;
 }
 
 float distance(float float_X, float float_Y){
@@ -200,7 +308,7 @@ float calculPrix(Habitation *dataHabitation, int int_K){
     // Sommer les prix des k lignes du tableau dataHabitation et dataHabitationRNG
     // Renvoyer la moyenne qui sera le prix du candidat.
 
-    float float_prix_dataHabitation;
+    float float_prix_dataHabitation = 0;
     float moyenne_prix;
 
     for (int i = 0;i<int_K;i++) {

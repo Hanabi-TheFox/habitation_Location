@@ -16,6 +16,8 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <errno.h>
+#include <unistd.h>
 // Définition de la structure "Habitation"
 typedef struct Habitation{
 	int int_id; //indice [0] pas besoin d'etre en entier car l'id est toujours un entier dans les fichiers .csv
