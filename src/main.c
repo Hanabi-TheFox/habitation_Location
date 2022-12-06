@@ -230,7 +230,7 @@ float_MAE_petit = float_MAE_15;
          if (float_MAE_petit == float_MAE_15) {
                 printf("Le meilleur k pour ce modele vaut k = 15");
         }
-
+        printf("\n");
         
 
         //--------------------------------------------------------------
@@ -291,7 +291,7 @@ float_MAE_petit = float_MAE_15;
                 printf("Le meilleur k pour ce modele vaut k = 15");
         }
 
-
+        printf("\n");
        //--------------------------------------------------------------
 
         //MODELE 3 : 3 categories, k=5, k = 10, k = 15
@@ -350,7 +350,7 @@ float_MAE_petit = float_MAE_15;
                 printf("Le meilleur k pour ce modele vaut k = 15");
         }
 
-      
+       printf("\n");
     
         printf("FIN PROGRAMME");
 
