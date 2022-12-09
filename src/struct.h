@@ -22,11 +22,11 @@
 #include <unistd.h>
 // Définition de la structure "Habitation"
 typedef struct Habitation{
-	int int_id; //indice [0] pas besoin d'etre en entier car l'id est toujours un entier dans les fichiers .csv
+	int int_id; //indice [0] pas besoin d'etre en réel car l'id est toujours un entier dans les fichiers .csv
 	float float_nbr_personnes_acceuillables; //indice [1]
 	float float_nbr_chambre; //indice [2]
 	float float_nbr_salle_de_bain; //indice [3]
-	float float_nbr_lit; //indice [4]			//indices par rapport aux vaeleurs dans les fichiers csv
+	float float_nbr_lit; //indice [4]			//indices par rapport aux valeurs dans les fichiers csv
 	float float_prix; //indice [5]			//qui peuvent changer d'ordre selon le fichier
 	float float_nuit_minimum; //indice [6]
 	float float_nuit_maximum; //indice [7]

@@ -150,6 +150,11 @@ int main(){
 			printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
 			exit(0);
 		}
+        if(k > int_tailledata){
+            printf("Erreur, k est plus grand que la taille du tableau\n");
+            printf("veuillez modifier la valeur de k dans struct.h\n");
+            exit(0);
+        }
 		// QUESTION E
 		// Tableau contenant les données du fichier airbnbEntrainement.csv
 		Habitation *tabEntrainement = malloc(int_tailledata * sizeof(Habitation));
