@@ -16,7 +16,7 @@ PROG=Habitation_Location
 
 # Créer l'executable
 $(PROG): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ -lm $(PARAMMATH)
+	$(CC) $(CFLAGS) $^ -o $@ $(PARAMMATH)
 
 # Créer tous les fichiers .o
 bin/%.o : src/%.c

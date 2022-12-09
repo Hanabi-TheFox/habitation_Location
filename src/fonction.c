@@ -195,9 +195,7 @@ if (int_numero_modele == 3) {
 	}
 	return *dataHabitation;
 	
-}
-
-else {
+} else {
 	//un soucis c'est passée
 	printf("Probleme avec la fonction CalculDistanceBonus \nMessage ERRNO ; %s",strerror(errno));
 }
