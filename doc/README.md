@@ -1,5 +1,7 @@
 //--------------------------------------------------
+
 //---------- Propriété de Ethan et Renato ----------
+
 //--------------------------------------------------
 
 ## Habitation_Location
@@ -22,9 +24,10 @@ trie les tableaux contenant les logements.
 
 En se fiant aux consignes de ce projet, notre équipe à decidée de diviser cette partie en 2.
 Dans le fichier struct.h, la constante 'Bonus' fait éxecuter la premiere ou deuxieme partie du
-programme. si 'Bonus' = 0, la premiere partie est executée. Si 'Bonus' = 1, deuxieme partie est executée.
+programme. si 'Bonus' = 0, la premiere partie est executée. Si 'Bonus' = 1, la deuxieme partie est executée.
+Le programme dispose aussi d'un mode d'affichage ralentie (activé par défaut) que vous pouvez désactiver dans struct.h
 Si vous voulez modifier la valeur de k. Pensez à faire ensuite un make clean puis un make afin que la nouvelle valeur de k soit pris en compte à la recompilation.
-Executer le projet
+## Executer le projet
 make : compile le programme
 
 make run : compile et lance le programme
