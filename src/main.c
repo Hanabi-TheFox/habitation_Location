@@ -6,6 +6,14 @@
 #include "fonction.h"
 
 int main(){
+	if (intSleep != 0 && intSleep != 1){
+		printf("Erreur: valeur de intSleep incorect, veuillez la changer dans struct.h\n");
+		exit(0);
+	}
+	if(Bonus != 0 && Bonus != 1){
+		printf("Erreur: valeur de Bonus incorect, veuillez la changer dans struct.h\n");
+		exit(0);
+	}
 	if (Bonus == 0){
 		// Déclaration des variables
 		int int_tailledata = tailledata("data/airbnb_donnees_propre.csv");

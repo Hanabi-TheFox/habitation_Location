@@ -12,7 +12,7 @@
 #define k 200
 #define Bonus 0 // 0 = désactivé, 1 = activé
 // Pour une meilleure lecture, il est préférable de garder le mode lent activé
-#define intSleep 1 // 0 = désactivé, 1 = activé (Evitez de mettre d'autres valeurs)
+#define intSleep 1 // 0 = désactivé, 1 = activé
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
