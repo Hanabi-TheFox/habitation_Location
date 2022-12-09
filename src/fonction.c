@@ -122,8 +122,8 @@ Habitation lecturedata(Habitation *dataHabitation, char *char_NomFichier){
 
 void affichage(Habitation *dataHabitation, int int_taille){
 	for(int i = 0; i < int_taille; i++){
-			printf("%d, %f %f, %f, %f, %f, %f, %f, %f, D = %f\n", dataHabitation[i].int_id, dataHabitation[i].float_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].float_nuit_minimum, dataHabitation[i].float_nuit_maximum, dataHabitation[i].float_nombre_de_retour, dataHabitation[i].float_distance_final);
-			}
+		printf("%d, %f %f, %f, %f, %f, %f, %f, %f, D = %f\n", dataHabitation[i].int_id, dataHabitation[i].float_nbr_personnes_acceuillables, dataHabitation[i].float_nbr_chambre, dataHabitation[i].float_nbr_salle_de_bain, dataHabitation[i].float_nbr_lit, dataHabitation[i].float_prix, dataHabitation[i].float_nuit_minimum, dataHabitation[i].float_nuit_maximum, dataHabitation[i].float_nombre_de_retour, dataHabitation[i].float_distance_final);
+	}
 }
 
 Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habitation *X){
@@ -144,82 +144,75 @@ Habitation calculdistance(Habitation *dataHabitation, int int_tailleData, Habita
 }
 
 Habitation calculdistanceBonus(Habitation *dataHabitation, int int_tailleData, Habitation *X,int int_numero_modele){
-// On calcule distance pour le modele 1
-	if ( int_numero_modele == 1) {
- for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
-		// On calcule la distance par rapport à nbr_personnes_acceuillables
-		dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
-		// On calcule la distance par rapport à nbr_chambre
-		dataHabitation[i].float_distance[1] = 0; // on ne calcule pas pour une categorie
-		// On calcule la distance par rapport à nbr_lit
-		dataHabitation[i].float_distance[2] = 0; // on ne calcule pas pour une categorie
-		// On calcule la distance_final qui est la racine carré de la somme des carrés des distances
-		dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
-		dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
-	}
+	// On calcule distance pour le modele 1
+		if ( int_numero_modele == 1) {
+			for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
+				// On calcule la distance par rapport à nbr_personnes_acceuillables
+				dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
+				// On calcule la distance par rapport à nbr_chambre
+				dataHabitation[i].float_distance[1] = 0; // on ne calcule pas pour une categorie
+				// On calcule la distance par rapport à nbr_lit
+				dataHabitation[i].float_distance[2] = 0; // on ne calcule pas pour une categorie
+				// On calcule la distance_final qui est la racine carré de la somme des carrés des distances
+				dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+				dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
+			}
+		return *dataHabitation;
+		}
 
+	//on calcule la distace pour le modele 2
+	if (int_numero_modele == 2) {
+		for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
+			// On calcule la distance par rapport à nbr_personnes_acceuillables
+			dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
+			// On calcule la distance par rapport à nbr_chambre
+			dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
+			// On calcule la distance par rapport à nbr_lit
+			dataHabitation[i].float_distance[2] = 0; // on ne calcule pas pour deux categorie
+			// On calcule la distance_final qui est la racine carré de la somme des carrés des distances
+			dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+			dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
+		}
+		return *dataHabitation;
+	}
+	// On calcule distance pour le modele 3
+	if (int_numero_modele == 3) {
+		for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
+			// On calcule la distance par rapport à nbr_personnes_acceuillables
+			dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
+			// On calcule la distance par rapport à nbr_chambre
+			dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
+			// On calcule la distance par rapport à nbr_lit
+			dataHabitation[i].float_distance[2] = distance(X->float_nbr_lit, dataHabitation[i].float_nbr_lit);
+			// On calcule la distance_final qui est la racine carré de la somme des carrés des distances
+			dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
+			dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
+		}
 	return *dataHabitation;
-	}
-
-
-//on calcule la distace pour le modele 2
-if (int_numero_modele == 2) {
-	for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
-		// On calcule la distance par rapport à nbr_personnes_acceuillables
-		dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
-		// On calcule la distance par rapport à nbr_chambre
-		dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
-		// On calcule la distance par rapport à nbr_lit
-		dataHabitation[i].float_distance[2] = 0; // on ne calcule pas pour deux categorie
-		// On calcule la distance_final qui est la racine carré de la somme des carrés des distances
-		dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
-		dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
-	}
-
-	return *dataHabitation;
-	}
-
-
-if (int_numero_modele == 3) {
-// On calcule distance 3*/
-	for (int i = 0; i < int_tailleData; i++){ //pour chaque logement, on calcula sa distance avec x selon 3 attributs
-		// On calcule la distance par rapport à nbr_personnes_acceuillables
-		dataHabitation[i].float_distance[0] = distance((float)X->float_nbr_personnes_acceuillables, (float)dataHabitation[i].float_nbr_personnes_acceuillables);
-		// On calcule la distance par rapport à nbr_chambre
-		dataHabitation[i].float_distance[1] = distance(X->float_nbr_chambre, dataHabitation[i].float_nbr_chambre);
-		// On calcule la distance par rapport à nbr_lit
-		dataHabitation[i].float_distance[2] = distance(X->float_nbr_lit, dataHabitation[i].float_nbr_lit);
-		// On calcule la distance_final qui est la racine carré de la somme des carrés des distances
-		dataHabitation[i].float_distance_final = ((dataHabitation[i].float_distance[0]+dataHabitation[i].float_distance[1]+dataHabitation[i].float_distance[2]));
-		dataHabitation[i].float_distance_final = sqrt(dataHabitation[i].float_distance_final);
+	} else {
+		//un soucis c'est passée
+		printf("Probleme avec la fonction CalculDistanceBonus \nMessage ERRNO ; %s",strerror(errno));
 	}
 	return *dataHabitation;
-	
-} else {
-	//un soucis c'est passée
-	printf("Probleme avec la fonction CalculDistanceBonus \nMessage ERRNO ; %s",strerror(errno));
-}
-
-return *dataHabitation;
 
 }
 
 float calculMAE(Prix *tabPrix,int int_tailleTabTest) {
-		//PARTIE MAE
-		// On crée le tableau qui contiendra les MAE pour chaque valeur de K
-		// l'indice du tableau est la quantité de K, et sa valeur sera la valeur du MAE associée
-		//float *tabMAE = malloc(K_max * sizeof(float));
+	//PARTIE MAE
+	// On crée le tableau qui contiendra les MAE pour chaque valeur de K
+	// l'indice du tableau est la quantité de K, et sa valeur sera la valeur du MAE associée
+	//float *tabMAE = malloc(K_max * sizeof(float));
 
-		float float_MAE;
-		for (int i=0;i<int_tailleTabTest;i++) {
-			float tmp = tabPrix[i].float_prix_predit - tabPrix[i].float_prix_reel;
-			tmp = fabs(tmp); // on prend la valeur absolue
-			float_MAE += tmp;
-		}
+	float float_MAE;
+	for (int i=0;i<int_tailleTabTest;i++) {
+		float tmp = tabPrix[i].float_prix_predit - tabPrix[i].float_prix_reel;
+		tmp = fabs(tmp); // on prend la valeur absolue
+		float_MAE += tmp;
+	}
 
-		float_MAE = float_MAE / int_tailleTabTest;
+	float_MAE = float_MAE / int_tailleTabTest;
 
-		return float_MAE;
+	return float_MAE;
 }
 
 float distance(float float_X, float float_Y){
