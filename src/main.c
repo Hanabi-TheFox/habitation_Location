@@ -242,28 +242,17 @@ int main(){
 			//recherche du plus petit MAE
 
 			//find the smallest
-			if(float_MAE[0]<float_MAE[1]) {
-				if(float_MAE[2]<float_MAE[0]) {
-					float_MAE_petit = float_MAE[2];
-				} else {
-					float_MAE_petit = float_MAE[0];
-				}
-			} else {
-				if(float_MAE[1]<float_MAE[2]) {
-					float_MAE_petit = float_MAE[1];
-				} else {
-					float_MAE_petit = float_MAE[2];
-				}
-			}
-			if (float_MAE_petit == float_MAE[0]) {
-					printf("Le meilleur k pour ce modele vaut k = 5");
-			}
-			if (float_MAE_petit == float_MAE[1]) {
-					printf("Le meilleur k pour ce modele vaut k = 10");
-			}
-			if (float_MAE_petit == float_MAE[2]) {
-					printf("Le meilleur k pour ce modele vaut k = 15");
-			}
+            // On veut trouver le plus petit MAE
+            float_MAE_petit = float_MAE[0];
+            int int_indice_petit = 0;
+            for (int i = 1; i < 3; i++) {
+                if (float_MAE[i] < float_MAE_petit) {
+                    float_MAE_petit = float_MAE[i];
+                    int_indice_petit = i;
+                }
+            }
+            int_indice_petit++; // on ajoute 1 car on a commencé à 1
+            printf("Le meilleur k pour ce modele vaut k = %d",int_indice_petit*5);
 			printf("\n\n");
 		}
 		printf("FIN PROGRAMME\n");
