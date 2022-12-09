@@ -144,7 +144,7 @@ int main(){
 		//X = tabTest[i] : on applique l'algorithme avec tous les tabEntrainement
 		//pour ce dandidat et on stock dans tabPredit[i] 
 
-	 
+	 	int int_K = k; // k logements à comparer avec le logement X = tabTest[i]
 		for (int i=0;i<int_tailledataTabTest;i++) {
  
 			*tabEntrainement = calculdistance(tabEntrainement, int_tailledata, &tabTest[i]); 
@@ -156,7 +156,6 @@ int main(){
 			*tabEntrainement = triRapide(tabEntrainement, int_tailledata);
 
 			// Calcul du prix du logement
-			int int_K = k; // k logements à comparer avec le logement X = tabTest[i]
 			tabPrediction[i] = calculPrix(tabEntrainement,int_K);
 			//printf("tabPrediction[%d] = %f\n",i, tabPrediction[i]);
 		}
@@ -172,7 +171,6 @@ int main(){
 		printf("1 - Nombre de personnes accueillables\n");
 		printf("2 - Nombre de chambres \n");
 		printf("3 - Nombre de lits\n");
-		int int_K = k;
 		printf("Nous ferons ce modele avec k = %d(constante dans fichier le struct.h)\n",int_K);
 		printf("Ce 'k' = %d a été utilisée pour calculer les prix prédits dans la question (g)\n",int_K);
 		//TabPrix contenant pour chaque case les valeur de prix réel et prix prédit
@@ -209,161 +207,66 @@ int main(){
 		//MODELE 1 : 1 categorie, k=5, k = 10, k = 15
 		//MODELE 2 : 2 categories, k=5, k = 10, k = 15
 		//MODELE 3 : 3 categories, k=5, k = 10, k = 15
+		for (int j=1;j<=3;j++){
+			for (int i=0;i<int_tailledataTabTest;i++) {
+				//on passe les parametres pour le calcul distance dans la partie bonus
+				//on doit passer le tabEntrainement, sa taille, les candidats dans tabTest et le modele choisi (1,2 ou 3);
+				*tabEntrainement = calculdistanceBonus(tabEntrainement, int_tailledata, &tabTest[i],j); 
+				
+				// Permutation des données du tableau On trie le tableau tabEntrainement
+				*tabEntrainement = permutationAleatoire(tabEntrainement, int_tailledata); //tailledata = taille de tabEntrainement
 
-		//on calcule le MAE pour chaque 'k' different
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 1 et k=5 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée
-
-		float float_MAE_5 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,1,5);
-		printf("MAE  = %f\n\n",float_MAE_5);
-		
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 1 et k=10 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée
-		
-		float float_MAE_10 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,1,10);
-		 printf("MAE  = %f\n\n",float_MAE_10);
-
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 1 et k=15 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée 
-		float float_MAE_15 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,1,15);
-		printf("MAE  = %f\n\n",float_MAE_15);
-
-		float float_MAE_petit;
-		//recherche du plus petit MAE
-		
-		//find the smallest
-		if(float_MAE_5<float_MAE_10) {
-			if(float_MAE_15<float_MAE_5) {
-				float_MAE_petit = float_MAE_15;
-			} else {
-				float_MAE_petit = float_MAE_5;
+				// On trie le tableau tabEntrainement
+				*tabEntrainement = triRapide(tabEntrainement, int_tailledata);
 			}
-		} else {
-			if(float_MAE_10<float_MAE_15) {
-				float_MAE_petit = float_MAE_10;
-			} else {
-				float_MAE_petit = float_MAE_15;
+
+			//on calcule le MAE pour chaque 'k' different
+			float float_MAE[3];
+			for(int_K=1;int_K<=3;int_K++){
+				printf("QUESTION j) PARTIE BONUS\n");
+				printf("MODELE %d et k = %d : \n",j,int_K*5);
+			
+				// Calcul du prix du logement
+				for (int l=0;l<int_tailledataTabTest;l++)
+					tabPrediction[l] = calculPrix(tabEntrainement,int_K*5);
+				// printf("tabPrediction[%d] = %f\n",i, tabPrediction[i]);
+				for (int l=0;l<int_tailledataTabTest;l++) {
+					tabPrix[l].float_prix_reel = tabTest[l].float_prix;
+					tabPrix[l].float_prix_predit = tabPrediction[l];        
+				}
+				float_MAE[int_K-1] = calculMAE(tabPrix,int_tailledataTabTest);
+				printf("MAE  = %f\n\n",float_MAE[int_K-1]);
 			}
-		}
-		if (float_MAE_petit == float_MAE_5) {
-				printf("Le meilleur k pour ce modele vaut k = 5");
-		}
-		if (float_MAE_petit == float_MAE_10) {
-				printf("Le meilleur k pour ce modele vaut k = 10");
-		}
-		if (float_MAE_petit == float_MAE_15) {
-				printf("Le meilleur k pour ce modele vaut k = 15");
-		}
-		printf("\n");
-		//--------------------------------------------------------------
 
-		//MODELE 2 : 2 categories, k=5, k = 10, k = 15
-	
-		//on calcule le MAE pour chaque 'k' different
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 2 et k=5 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée
+			float float_MAE_petit;
+			//recherche du plus petit MAE
 
-		float_MAE_5 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,2,5);
-		printf("MAE  = %f\n\n",float_MAE_5);
-		
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 2 et k=10 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée
-		
-		float_MAE_10 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,2,10);
-		 printf("MAE  = %f\n\n",float_MAE_10);
-
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 2 et k=15 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée 
-		float_MAE_15 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,2,15);
-		printf("MAE  = %f\n\n",float_MAE_15);
-
-		float_MAE_petit = 0;
-		//recherche du plus petit MAE
-		
-		//find the smallest
-		if(float_MAE_5<float_MAE_10) {
-			if(float_MAE_15<float_MAE_5) {
-				float_MAE_petit = float_MAE_15;
+			//find the smallest
+			if(float_MAE[0]<float_MAE[1]) {
+				if(float_MAE[2]<float_MAE[0]) {
+					float_MAE_petit = float_MAE[2];
+				} else {
+					float_MAE_petit = float_MAE[0];
+				}
 			} else {
-				float_MAE_petit = float_MAE_5;
+				if(float_MAE[1]<float_MAE[2]) {
+					float_MAE_petit = float_MAE[1];
+				} else {
+					float_MAE_petit = float_MAE[2];
+				}
 			}
-		} else {
-			if(float_MAE_10<float_MAE_15) {
-				float_MAE_petit = float_MAE_10;
-			} else {
-				float_MAE_petit = float_MAE_15;
+			if (float_MAE_petit == float_MAE[0]) {
+					printf("Le meilleur k pour ce modele vaut k = 5");
 			}
-		}
-		if (float_MAE_petit == float_MAE_5) {
-				printf("Le meilleur k pour ce modele vaut k = 5");
-		}
-		if (float_MAE_petit == float_MAE_10) {
-				printf("Le meilleur k pour ce modele vaut k = 10");
-		}
-		if (float_MAE_petit == float_MAE_15) {
-				printf("Le meilleur k pour ce modele vaut k = 15");
-		}
-		printf("\n");
-	   //--------------------------------------------------------------
-
-		//MODELE 3 : 3 categories, k=5, k = 10, k = 15
-	
-		//on calcule le MAE pour chaque 'k' different
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 3 et k=5 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée
-
-
-		float_MAE_5 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,3,5);
-		printf("MAE  = %f\n\n",float_MAE_5);
-		
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 3 et k=10 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée
-		
-		float_MAE_10 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,3,10);
-		printf("MAE  = %f\n\n",float_MAE_10);
-
-		printf("QUESTION j) PARTIE BONUS\n");
-		printf("MODELE 3 et k=15 : \n");
-		//sleep(3); //Pour avoir le bon temps pour lire les parametres du modele a etre affichée 
-		float_MAE_15 = calculMAE(tabEntrainement,int_tailledata,tabTest,int_tailledataTabTest,tabPrediction,tabPrix,3,15);
-		printf("MAE  = %f\n\n",float_MAE_15);
-
-		float_MAE_petit = 0;
-		//recherche du plus petit MAE
-		
-		//find the smallest
-		if(float_MAE_5<float_MAE_10) {
-			if(float_MAE_15<float_MAE_5) {
-				float_MAE_petit = float_MAE_15;
-			} else {
-				float_MAE_petit = float_MAE_5;
+			if (float_MAE_petit == float_MAE[1]) {
+					printf("Le meilleur k pour ce modele vaut k = 10");
 			}
-		} else {
-			if(float_MAE_10<float_MAE_15) {
-				float_MAE_petit = float_MAE_10;
-			} else {
-				float_MAE_petit = float_MAE_15;
+			if (float_MAE_petit == float_MAE[2]) {
+					printf("Le meilleur k pour ce modele vaut k = 15");
 			}
+			printf("\n\n");
 		}
-		if (float_MAE_petit == float_MAE_5) {
-				printf("Le meilleur k pour ce modele vaut k = 5");
-		}
-		if (float_MAE_petit == float_MAE_10) {
-				printf("Le meilleur k pour ce modele vaut k = 10");
-		}
-		if (float_MAE_petit == float_MAE_15) {
-				printf("Le meilleur k pour ce modele vaut k = 15");
-		}
-		printf("\n");
-		printf("FIN PROGRAMME");
+		printf("FIN PROGRAMME\n");
 		
 		// On libère la mémoire
 		free(tabEntrainement);

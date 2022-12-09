@@ -206,37 +206,11 @@ return *dataHabitation;
 
 }
 
-float calculMAE(Habitation *tabEntrainement,int int_tailleTabEntrainement, Habitation *tabTest,int int_tailleTabTest, float *tabPrediction,Prix *tabPrix,int modele,int a) {
-	for (int i=0;i<int_tailleTabTest;i++) {
- 
-		//on passe les parametres pour le calcul distance dans la partie bonus
-		//on doit passer le tabEntrainement, sa taille, les candidats dans tabTest et le modele choisi (1,2 ou 3);
-		*tabEntrainement = calculdistanceBonus(tabEntrainement, int_tailleTabEntrainement, &tabTest[i],modele); 
-		
-		// Permutation des données du tableau On trie le tableau tabEntrainement
-		*tabEntrainement = permutationAleatoire(tabEntrainement, int_tailleTabEntrainement); //tailledata = taille de tabEntrainement
-
-		// On trie le tableau tabEntrainement
-		*tabEntrainement = triRapide(tabEntrainement, int_tailleTabEntrainement);
-
-		// Calcul du prix du logement
-		int int_K = a; // k logements à comparer avec le logement X = tabTest[i]
-		tabPrediction[i] = calculPrix(tabEntrainement,int_K);
-	   // printf("tabPrediction[%d] = %f\n",i, tabPrediction[i]);
-		}
-
+float calculMAE(Prix *tabPrix,int int_tailleTabTest) {
 		//PARTIE MAE
 		// On crée le tableau qui contiendra les MAE pour chaque valeur de K
 		// l'indice du tableau est la quantité de K, et sa valeur sera la valeur du MAE associée
 		//float *tabMAE = malloc(K_max * sizeof(float));
-
-		for (int i=0;i<int_tailleTabTest;i++) {
-			tabPrix[i].float_prix_reel = tabTest[i].float_prix; //number_of_review a devenu prix à cause du decalage des attributs dans les fichiers airbnbEntrainement et airbnbTest
-			tabPrix[i].float_prix_predit = tabPrediction[i];        
-		}
-		/*for (int i=0;i<int_tailleTabTest;i++) {
-			printf("TabPrix[%d] rééel = %f | TabPrix[%d] prédit = %f\n",i,tabPrix[i].float_prix_reel,i,tabPrix[i].float_prix_predit = tabPrediction[i]);
-		}*/
 
 		float float_MAE;
 		for (int i=0;i<int_tailleTabTest;i++) {
