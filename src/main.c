@@ -128,7 +128,6 @@ int main(){
 	}
 	else if (Bonus == 1)
 	{
-	 
 		// BONUS
 		printf("\nPartie Bonus : Evaluation de la performance du modèle de prédiction\n");
 		sleep(intSleep*2);
@@ -150,11 +149,11 @@ int main(){
 			printf("il se peut que le fichier soit corrompu ou ne possède aucune données.\n");
 			exit(0);
 		}
-        if(k > int_tailledata){
-            printf("Erreur, k est plus grand que la taille du tableau\n");
-            printf("veuillez modifier la valeur de k dans struct.h\n");
-            exit(0);
-        }
+		if(k > int_tailledata){
+			printf("Erreur, k est plus grand que la taille du tableau\n");
+			printf("veuillez modifier la valeur de k dans struct.h\n");
+			exit(0);
+		}
 		// QUESTION E
 		// Tableau contenant les données du fichier airbnbEntrainement.csv
 		Habitation *tabEntrainement = malloc(int_tailledata * sizeof(Habitation));
@@ -177,7 +176,7 @@ int main(){
 		*tabTest = lecturedata(tabTest,"data/airbnbTest.csv");
 		//printf("Affichage tableau tabTest\n \n");
 		//affichage(tabTest, int_tailledata);
-	  
+
 		// On créer un tableau de la même taille que le tableau de test qui contiendra les prix prédits
 		float *tabPrediction = malloc(int_tailledataTabTest * sizeof(float));
 		if (tabTest == NULL){
@@ -192,7 +191,7 @@ int main(){
 		//X = tabTest[i] : on applique l'algorithme avec tous les tabEntrainement
 		//pour ce dandidat et on stock dans tabPredit[i] 
 		for (int i=0;i<int_tailledataTabTest;i++) {
- 
+
 			*tabEntrainement = calculdistance(tabEntrainement, int_tailledata, &tabTest[i]); 
 
 			// Permutation des données du tableau dataHabitation
