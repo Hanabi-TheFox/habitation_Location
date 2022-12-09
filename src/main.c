@@ -68,42 +68,39 @@ int main(){
         
         for (int j=1;j<=3;j++) { // j correspond au modele
 
-        printf("Calcul pour le Modele %d\n",j);
-        // Lecture du fichier airbnb_donees_propre.csv
-        *dataHabitation = lecturedata(dataHabitation, "data/airbnb_donnees_propre.csv");
-        
-        // Calcul de la distance entre le candidat et les logements de la base de donnée
-        *dataHabitation = calculdistanceBonus(dataHabitation, int_tailledata, &X,j); 
+            printf("Calcul pour le Modele %d\n",j);
+            // Lecture du fichier airbnb_donees_propre.csv
+            *dataHabitation = lecturedata(dataHabitation, "data/airbnb_donnees_propre.csv");
+            
+            // Calcul de la distance entre le candidat et les logements de la base de donnée
+            *dataHabitation = calculdistanceBonus(dataHabitation, int_tailledata, &X,j); 
 
-        // Permutation des données du tableau dataHabitation
-        *dataHabitation = permutationAleatoire(dataHabitation, int_tailledata);
+            // Permutation des données du tableau dataHabitation
+            *dataHabitation = permutationAleatoire(dataHabitation, int_tailledata);
 
-        // On trie le tableau dataHabitation
-        *dataHabitation = triRapide(dataHabitation, int_tailledata);
+            // On trie le tableau dataHabitation
+            *dataHabitation = triRapide(dataHabitation, int_tailledata);
 
-        // Calcul du prix du logement
-        int_K = 5;
+            // Calcul du prix du logement
+            int_K = 5;
 
-        for (int i=0;i<3;i++) {
-        X.float_prix = calculPrix(dataHabitation, int_K);
-        printf("Pour Modele %d et k = %d, le prix prédit du logement vaut prix = %f\n\n",j,int_K,X.float_prix);
-        int_K+=5; // on passe de k = 5 à k = 10 et apres k = 15
+            for (int i=0;i<3;i++) {
+                X.float_prix = calculPrix(dataHabitation, int_K);
+                printf("Pour Modele %d et k = %d, le prix prédit du logement vaut prix = %f\n\n",j,int_K,X.float_prix);
+                int_K+=5; // on passe de k = 5 à k = 10 et apres k = 15
+            }
+
+            //affichage(dataHabitation, int_tailledata);
+            // Affichage du prix du logement
         }
-
-        //affichage(dataHabitation, int_tailledata);
-        // Affichage du prix du logement
-
         printf("FIN SUJET 1\n");
-
-        }
-
         free(dataHabitation);
     }
     else if (Bonus == 1)
     {
      
         // BONUS
-        printf("Partie Bonus : Evaluation de la performance du modèle de prédiction\n\n");
+        printf("Partie Bonus : Evaluation de la performance du modèle de prédiction\n Cette étape peur prendre du temps, merci de patienter.\n\n");
         // Déclaration des variables
         int int_tailledata = tailledata("data/airbnbEntrainement.csv");
         if(int_tailledata == 0){
