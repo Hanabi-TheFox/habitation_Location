@@ -29,7 +29,7 @@ typedef struct Habitation{
 	float float_nuit_minimum; //indice [6]
 	float float_nuit_maximum; //indice [7]
 	float float_nombre_de_retour; //indice [8]
-    float float_distance[3]; //par rapport au candidat(logement) X
+	float float_distance[3]; //par rapport au candidat(logement) X
 	float float_distance_final;
 }Habitation;
 
